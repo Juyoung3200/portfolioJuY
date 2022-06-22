@@ -1,0 +1,38 @@
+// Color system
+
+$blue: #2a93d5 !default;
+$deepBlue: #135589 !default;
+$orange: #e46425 !default;
+$gray-500: #adb5bd !default;
+
+
+$primary: $blue !default;
+$secondary: $orange !default;
+$success: $deepBlue !default;
+$delete: $gray-500 !default;
+
+
+
+$theme-colors: () !default;
+$theme-colors: map-merge(("primary": $primary,
+    "secondary": $secondary,
+    "success": $success,
+    "delete": $delete),
+  $theme-colors);
+
+// 미디어쿼리 해상도 설정
+
+$grid-breakpoints: (xs: 0,
+  sm: 480px,
+  md: 768px,
+  lg: 1024px,
+  xl: 1600px) !default;
+
+// 테이블 호버 백그라운드 색상 변경
+$table-hover-bg: rgba($blue, .075) !default;
+
+// 페이지 이동경로 구분 표시 /에서 >로 변경
+$breadcrumb-divider: quote(">") !default;
+
+
+@import "bootstrap";
