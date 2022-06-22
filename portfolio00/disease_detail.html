@@ -1,0 +1,400 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>disease_detail</title>
+    <link rel="stylesheet" href="./css/detail.css">
+</head>
+<body>
+    <div id="wrap">
+        <div class="content">
+
+            <!-- 질병 > 질병명으로 검색하기 테이블 > 내용 상세보기 -->
+
+            <table class="detail_table">
+                <tbody>
+                    <tr>
+                        <th scope="row">disease ID</th>
+                        <td>KINP-D0123456K</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">disease name</th>
+                        <td>Acute myeloid leukaemia</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">source DB</th>
+                        <td><a href="http://db.idrblab.net/ttd/search/ttd/disease?search_api_fulltext=Acute%20myeloid%20leukaemia" target="_blank" class="dblink">TTD : ICD-11:2A6O</a></td>
+                    </tr>
+                    <tr>
+                        <th scope="row">disease score</th>
+                        <td></td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <!-- 질병 > 질병과 연관된 타겟 테이블 > 내용 상세보기 -->
+
+            <table class="detail_table">
+                <tbody>
+                    <tr>
+                        <th scope="row">target ID</th>
+                        <td>KINP-N0123456K</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">UniProt ID</th>
+                        <td>Astragalus flexuosus</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">target type</th>
+                        <td>Species</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">target name</th>
+                        <td>1234496</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">target organism tax ID</th>
+                        <td>73628026; Article; Wang, Lei; Qin, Wen; Tian, Li; Zhang, Xue-Xue; Lin, Fang; Cheng, Fan; Chen, Jian-Feng; Liu, Cheng-Xiong; Guo, Zhi-Yong; Proksch, Peter; Zou, Kun; Fitoterapia; vol. 127; (2018); p. 349 - 355;</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">target organism</th>
+                        <td>Reaxys</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <!-- 질병 > 타겟별 화합물 활성정보 문헌 테이블 > 내용 상세보기 -->
+
+            <table class="detail_table">
+                <tbody>
+                    <tr>
+                        <th scope="row">chemical ID</th>
+                        <td>KINP-C0123456K</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">chemical name</th>
+                        <td>8-acetyl-3,4-dihydroxy-5,7-dimethoxy-2,2-dimethylchroman</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">activity property</th>
+                        <td>Others</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">activity type</th>
+                        <td>Potency</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">activity relation</th>
+                        <td>&#61;</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">activity value</th>
+                        <td>19.5</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">activity units</th>
+                        <td>muM</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">assay organism</th>
+                        <td>sars coronavirus</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">assay tax ID</th>
+                        <td>1906665</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">ref info</th>
+                        <td>63190995; Article; Luyen, Bui Thi Thuy; Tai, Bui Huu; Thao, Nguyen Phuong; Eun, Kim Ji; Cha, Ji Yun; Xin, Ming Jie; Lee, Young Mi; Kim, Young Ho; Bioorganic and Medicinal Chemistry Letters; vol. 24; 8; (2014); p. 1895 - 1900;</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">ref info type</th>
+                        <td>Bioassay : FBS: fetal bovine serum; camptotherin (IC50 0.05 mug/ml), tamoxijen citrate (IC50 10.0 mug/ml) and VP-16 (etoposide) (IC50: 1.9 mug/ml) used as reference freshly trypsinized cell suspension in RPMI-1640 supplemented with FBS seeded in plates (1.5E3 - 7.5E3 cells per well), title comp. added, incubated for 3 d; cells fixed with CF3COOH, stained with sulforhodamine B; cells counted using UV control </td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <!-- 질병 > 타겟별 화합물 활성정보 예측 테이블 > 내용 상세보기 -->
+
+            <table class="detail_table">
+                <tbody>
+                    <tr>
+                        <th scope="row">chemical ID</th>
+                        <td>KINP-C0123456K</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">chemical name</th>
+                        <td>8-acetyl-3,4-dihydroxy-5,7-dimethoxy-2,2-dimethylchroman</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">associate score</th>
+                        <td>0.99</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">activity property</th>
+                        <td>In Vitro (Efficacy)</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">activity type</th>
+                        <td>IC50</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">activity relation</th>
+                        <td><=</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">activity value</th>
+                        <td>19.5</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">activity units</th>
+                        <td>muM</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">ref info</th>
+                        <td>63190995; Article; Luyen, Bui Thi Thuy; Tai, Bui Huu; Thao, Nguyen Phuong; Eun, Kim Ji; Cha, Ji Yun; Xin, Ming Jie; Lee, Young Mi; Kim, Young Ho; Bioorganic and Medicinal Chemistry Letters; vol. 24; 8; (2014); p. 1895 - 1900;</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">ref info type</th>
+                        <td>Bioassay : FBS: fetal bovine serum; camptotherin (IC50 0.05 mug/ml), tamoxijen citrate (IC50 10.0 mug/ml) and VP-16 (etoposide) (IC50: 1.9 mug/ml) used as reference freshly trypsinized cell suspension in RPMI-1640 supplemented with FBS seeded in plates (1.5E3 - 7.5E3 cells per well), title comp. added, incubated for 3 d; cells fixed with CF3COOH, stained with sulforhodamine B; cells counted using UV control </td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <!-- 질병 > 타겟별 화합물 활성정보 예측 테이블 > more ref > 내용 상세보기 -->
+
+            <table class="detail_table">
+                <tbody>
+                    <tr>
+                        <th scope="row">chemical ID</th>
+                        <td>KINP-C0123456K</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">chemical name</th>
+                        <td>8-acetyl-3,4-dihydroxy-5,7-dimethoxy-2,2-dimethylchroman</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">associate score</th>
+                        <td>0.99</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">activity property</th>
+                        <td>In Vitro (Efficacy)</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">activity type</th>
+                        <td>IC50</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">activity relation</th>
+                        <td><=</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">activity value</th>
+                        <td>19.5</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">activity units</th>
+                        <td>muM</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">ref info</th>
+                        <td>63190995; Article; Luyen, Bui Thi Thuy; Tai, Bui Huu; Thao, Nguyen Phuong; Eun, Kim Ji; Cha, Ji Yun; Xin, Ming Jie; Lee, Young Mi; Kim, Young Ho; Bioorganic and Medicinal Chemistry Letters; vol. 24; 8; (2014); p. 1895 - 1900;</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">ref info type</th>
+                        <td>Bioassay : FBS: fetal bovine serum; camptotherin (IC50 0.05 mug/ml), tamoxijen citrate (IC50 10.0 mug/ml) and VP-16 (etoposide) (IC50: 1.9 mug/ml) used as reference freshly trypsinized cell suspension in RPMI-1640 supplemented with FBS seeded in plates (1.5E3 - 7.5E3 cells per well), title comp. added, incubated for 3 d; cells fixed with CF3COOH, stained with sulforhodamine B; cells counted using UV control </td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <!-- 질병 > 전체 타겟에 대한 화합물 활성정보 문헌 테이블 > 내용 상세보기 -->
+
+            <table class="detail_table">
+                <tbody>
+                    <tr>
+                        <th scope="row">target name</th>
+                        <td>peritoneum cell</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">chemical name</th>
+                        <td>8-acetyl-3,4-dihydroxy-5,7-dimethoxy-2,2-dimethylchroman</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">associate score</th>
+                        <td>0.99</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">activity property</th>
+                        <td>In Vitro (Efficacy)</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">activity type</th>
+                        <td>IC50</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">activity relation</th>
+                        <td><=</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">activity value</th>
+                        <td>19.5</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">activity units</th>
+                        <td>muM</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">assay organism</th>
+                        <td>Homo sapiens</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">assay tax ID</th>
+                        <td>9606</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">ref info</th>
+                        <td>63190995; Article; Luyen, Bui Thi Thuy; Tai, Bui Huu; Thao, Nguyen Phuong; Eun, Kim Ji; Cha, Ji Yun; Xin, Ming Jie; Lee, Young Mi; Kim, Young Ho; Bioorganic and Medicinal Chemistry Letters; vol. 24; 8; (2014); p. 1895 - 1900;</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">ref info type</th>
+                        <td>Bioassay : FBS: fetal bovine serum; camptotherin (IC50 0.05 mug/ml), tamoxijen citrate (IC50 10.0 mug/ml) and VP-16 (etoposide) (IC50: 1.9 mug/ml) used as reference freshly trypsinized cell suspension in RPMI-1640 supplemented with FBS seeded in plates (1.5E3 - 7.5E3 cells per well), title comp. added, incubated for 3 d; cells fixed with CF3COOH, stained with sulforhodamine B; cells counted using UV control </td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <!-- 질병 > 전체 타겟에 대한 화합물 활성정보 예측 테이블 > 내용 상세보기 -->
+
+            <table class="detail_table">
+                <tbody>
+                    <tr>
+                        <th scope="row">target name</th>
+                        <td>peritoneum cell</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">chemical name</th>
+                        <td>8-acetyl-3,4-dihydroxy-5,7-dimethoxy-2,2-dimethylchroman</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">associate score</th>
+                        <td>0.99</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">activity property</th>
+                        <td>In Vitro (Efficacy)</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">activity type</th>
+                        <td>IC50</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">activity relation</th>
+                        <td><=</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">activity value</th>
+                        <td>19.5</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">activity units</th>
+                        <td>muM</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">ref info</th>
+                        <td>63190995; Article; Luyen, Bui Thi Thuy; Tai, Bui Huu; Thao, Nguyen Phuong; Eun, Kim Ji; Cha, Ji Yun; Xin, Ming Jie; Lee, Young Mi; Kim, Young Ho; Bioorganic and Medicinal Chemistry Letters; vol. 24; 8; (2014); p. 1895 - 1900;</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">ref info type</th>
+                        <td>Bioassay : FBS: fetal bovine serum; camptotherin (IC50 0.05 mug/ml), tamoxijen citrate (IC50 10.0 mug/ml) and VP-16 (etoposide) (IC50: 1.9 mug/ml) used as reference freshly trypsinized cell suspension in RPMI-1640 supplemented with FBS seeded in plates (1.5E3 - 7.5E3 cells per well), title comp. added, incubated for 3 d; cells fixed with CF3COOH, stained with sulforhodamine B; cells counted using UV control </td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <!-- 질병 > 전체 타겟에 대한 화합물 활성정보 예측 테이블 > more ref > 내용 상세보기 -->
+
+            <table class="detail_table">
+                <tbody>
+                    <tr>
+                        <th scope="row">target name</th>
+                        <td>peritoneum cell</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">chemical name</th>
+                        <td>8-acetyl-3,4-dihydroxy-5,7-dimethoxy-2,2-dimethylchroman</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">associate score</th>
+                        <td>0.99</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">activity property</th>
+                        <td>In Vitro (Efficacy)</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">activity type</th>
+                        <td>IC50</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">activity relation</th>
+                        <td><=</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">activity value</th>
+                        <td>19.5</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">activity units</th>
+                        <td>muM</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">ref info</th>
+                        <td>63190995; Article; Luyen, Bui Thi Thuy; Tai, Bui Huu; Thao, Nguyen Phuong; Eun, Kim Ji; Cha, Ji Yun; Xin, Ming Jie; Lee, Young Mi; Kim, Young Ho; Bioorganic and Medicinal Chemistry Letters; vol. 24; 8; (2014); p. 1895 - 1900;</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">ref info type</th>
+                        <td>Bioassay : FBS: fetal bovine serum; camptotherin (IC50 0.05 mug/ml), tamoxijen citrate (IC50 10.0 mug/ml) and VP-16 (etoposide) (IC50: 1.9 mug/ml) used as reference freshly trypsinized cell suspension in RPMI-1640 supplemented with FBS seeded in plates (1.5E3 - 7.5E3 cells per well), title comp. added, incubated for 3 d; cells fixed with CF3COOH, stained with sulforhodamine B; cells counted using UV control </td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <!-- 질병 > 선택한 화합물이 포함된 천연물 테이블 > 내용 상세보기 -->
+
+            <table class="detail_table">
+                <tbody>
+                    <tr>
+                        <th scope="row">organism ID</th>
+                        <td>KINP-N0123456K</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">organism name</th>
+                        <td>Astragalus flexuosus</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">organism tax level</th>
+                        <td>Species</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">organism tax ID</th>
+                        <td>1234496</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">ref info</th>
+                        <td>73628026; Article; Wang, Lei; Qin, Wen; Tian, Li; Zhang, Xue-Xue; Lin, Fang; Cheng, Fan; Chen, Jian-Feng; Liu, Cheng-Xiong; Guo, Zhi-Yong; Proksch, Peter; Zou, Kun; Fitoterapia; vol. 127; (2018); p. 349 - 355;</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">ref info type</th>
+                        <td>Reaxys</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">comment</th>
+                        <td>whole plant of Carpesium abrotanoides L. (Compositae); collected in Changyangin, Hubei Province, China</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    
+</body>
+</html>

@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<title>생리활성 천연물 데이터 포털</title>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no, target-densitydpi=medium-dpi">
+<!-- 전화, 주소, 이메일 자동 링크 없앨 때 -->
+<!--<meta name="format-detection" content="telephone=no, address=no, email=no" />-->
+<!-- 기본 포맷 삭제 -->
+<!--<meta name="format-detection" content="no" />-->
+<meta name="title"  property="og:title" content="생리활성 천연물 데이터 포털">
+<meta name="images" property="og:image" content="./images/link_thumb.jpg">
+<meta name="description" property="og:description" content="생리활성 천연물 데이터 포털">
+<meta name="type" property="og:type" content="article">
+<link rel="icon" type="img/png" sizes="64x64" href="">
+<link rel="stylesheet" href="css/main.css">
+
+
+<script type="text/javascript" src="http://code.jquery.com/jquery-1.12.0.min.js" ></script>
+<script type="text/javaScript" language="javascript" defer="defer">
+/* 글 목록 화면 function */
+function fn_egov_selectList() {
+ document.listForm.action = "<c:url value='/Compound.do'/>";
+    document.listForm.submit();
+}
+
+
+$('categories li').on('click', function(){
+    $('categories li').removeClass('selected');
+    $(this).addClass('selected');
+});
+
+$(function () {
+  $("#toggleMenu").click(function (ev) {
+    ev.preventDefault();
+    $(this).toggleClass("active");
+    $(".overlay").toggleClass("visible");
+  });
+});
+
+
+</script>
+</head>
+<body>
+    <section id="wrap">
+      <header>
+        <div class="logo_box"><img src="./img/main/m_logo.png" alt="천연물데이터포털"></div>
+        <nav>
+          <ul>
+            <li><a href="search.html" target="_blank">통합검색</a></li>
+            <li><a href="target.html" target="_blank">타겟</a></li>
+            <li><a href="chemical.html" target="_blank">화합물</a></li>
+            <li><a href="organism.html" target="_blank">천연물</a></li>
+            <li><a href="disease.html" target="_blank">질병</a></li>
+          </ul>
+        </nav>
+        <div class="h_btn">
+          <a href="#"><img src="./img/main/red_home.png" alt="메인홈버튼"></a>
+        </div>
+      </header>
+      <div id="toggleMenu">
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+      <div class="overlay">
+        <nav>
+          <ul>
+            <li><a href="search.html" target="_blank">통합검색</a></li>
+            <li><a href="target.html" target="_blank">타겟</a></li>
+            <li><a href="chemical.html" target="_blank">화합물</a></li>
+            <li><a href="organism.html" target="_blank">천연물</a></li>
+            <li><a href="disease.html" target="_blank">질병</a></li>
+          </ul>
+        </nav>
+        </div>
+      <section id="container">
+        <div class="left-info">
+          <div class="top-box">
+            <div class="main_search">
+              <h1 class="srch_title">KIST 천연물 정보 통합검색</h1>
+              <div>
+                <form action="#" class="search_box">
+                      <div class="input_form">
+                          <input type="text" placeholder="검색어를 입력하세요.">
+                          <a href="" class="btn_search"><span>search</span></a>
+                      </div>
+                </form>	
+              </div>
+            </div>
+          </div>
+          <div class="btom-box">
+            <div class="data_info">
+              <h1 class="data_title"><img src="./img/content/line.png" alt=""><span>천연화합물 실물 및 분석 데이터 확보 현황</span></h1>
+              <div class="data_box">
+                <div class="data_box_small"><p>타&nbsp;&nbsp;&nbsp;&nbsp;겟</p><strong>7691</strong><span>건</span></div>
+                      <div class="data_box_small"><p>화합물</p><strong>30927</strong><span>건</span></div>
+                <div class="data_box_small"><p>천연물</p><strong>24895</strong><span>건</span></div>
+                      <div class="data_box_small"><p>질&nbsp;&nbsp;&nbsp;&nbsp;병</p><strong>8188</strong><span>건</span></div>			
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="right-info">
+          <div class="kist_link">
+            <div class="banner_img"><a href="http://gn.kist.re.kr" target="_blank"><img src="img/main/go_kist.png"></a></div>
+          </div>
+          <div class="library_link">
+            <a href="#" target="_blank">
+            <p class="title_txt">KIST&nbsp;천연물&nbsp;라이브러리</p>
+           <p class="data_list"><span class="num">239</span>건</p>
+           <img src="./img/main/right-arrow.png" alt="라이브러리 바로가기버튼">
+          </a>
+        </div>
+            <div class="main_bg">
+        <div class="bg_img"><img src="img/main/bg_img.png"></div>
+            </div>   
+        </div>
+      </section>
+  
+        <footer class="footer">
+          <div class="f_t">
+            <div>
+                <a href="#" class="f_logo"><img src="img/main/f_logo.png" alt=""></a>
+            </div>
+          </div>
+          <div class="f_b">
+            <div>
+                <div class="f_address"><p>(25451) 강원 강릉시 사임당로 679 KIST 강릉분원 천연물연구소  &emsp; | &emsp; Tel. 033-650-3416  &emsp; | &emsp;  Fax. 033-650-3419</p></div>
+                <div class="f_copyright"><p>COPYRIGHT ⓒ 2021 BY KIST ALL RIGHTS RESERVED</p></div>
+            </div>
+          </div>
+          <!-- 1024px 이하 버전 푸터 주소부분 설정 -->
+    <div class="f_b_1024">
+      <div>
+          <div class="f_address_1024"><p>(25451) 강원 강릉시 사임당로 679 KIST 강릉분원 천연물연구소 <br> Tel. 033-650-3416  &emsp; | &emsp;  Fax. 033-650-3419</p></div>
+          <div class="f_copyright_1024"><p>COPYRIGHT ⓒ 2021 BY KIST ALL RIGHTS RESERVED</p></div>
+      </div>
+    </div>
+          <div class="admin_log_btn">
+            <div>
+              <a href="#"><span>관리자</span></a>
+            </div>
+          </div>
+      </footer>
+    </section>
+
+	<script type="text/javascript" src="./js/jquery-3.2.1.min.js"></script>
+	<script type="text/javascript" src="./js/ui.js"></script>
+	<script data-cfasync="false" type="text/javascript" src="./js/form-submission-handler.js"></script>
+</body>
+</html>

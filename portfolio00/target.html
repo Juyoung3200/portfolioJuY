@@ -1,0 +1,998 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>타겟</title>
+
+    <!-- 제이쿼리CDN -->
+    <script type="text/javascript" src="http://code.jquery.com/jquery-latest.min.js"></script>
+
+    <!-- 외부스크립트연결 -->
+    <script src="./js/target.js"></script>
+    
+    <!-- 제이쿼리UI -->
+	<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js" integrity="sha256-T0Vest3yCU7pafRw9r+settMBX6JkKN06dqBnpQ8d30=" crossorigin="anonymous"></script>
+
+
+    <!-- 외부스타일시트연결 -->
+    <link rel="stylesheet" href="./css/target.css">
+
+    <!-- 데이터테이블 연결 -->
+<script	src="https://code.jquery.com/jquery-3.5.1.min.js" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0="crossorigin="anonymous"></script>
+<script src="./js/jquery.dataTables.js" charset="utf-8"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js"></script>
+<script src="http://cdn.datatables.net/plug-ins/1.10.15/dataRender/datetime.js"></script>
+<link rel="stylesheet" href="./css/jquery.dataTables.css">
+
+
+</head>
+<body>
+    <div id="wrap">
+      <header>
+        <div class="logo">
+          <img src="./img/header/logo_w.png" alt="">
+        </div>
+      
+        <div class="nav">
+      
+          <!-- 1025~1920px 버전 메뉴 설정 -->
+          <ul>
+            <li><a href="search.html">통합검색</a></li>
+            <li><a href="target.html" target="_blank">타겟</a></li>
+            <li><a href="chemical.html" target="_blank">화합물</a></li>
+            <li><a href="organism.html" target="_blank">천연물</a></li>
+            <li><a href="disease.html" target="_blank">질병</a></li>
+          </ul>
+        </div>
+      
+        <!-- 홈버튼 설정 -->
+        <div class="home"><a href="main.html" target="_blank"><img src="./img/header/home.png" alt=""></a></div>
+      </header>
+    <div id="toggleMenu">
+      <span></span>
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
+    <div class="overlay">
+      <nav>
+        <ul>
+          <li><a href="search.html">통합검색</a></li>
+          <li><a href="target.html" target="_blank">타겟</a></li>
+          <li><a href="chemical.html" target="_blank">화합물</a></li>
+          <li><a href="organism.html" target="_blank">천연물</a></li>
+          <li><a href="disease.html" target="_blank">질병</a></li>
+        </ul>
+      </nav>
+      </div>
+
+        <div class="content">
+            <div class="org">
+                <div class="title">
+                    <h3>타겟 검색하기</h3>
+                </div>
+    
+                <div class="srch_l">
+                    <input type="text" class="srch_input" placeholder="&emsp;다른 타겟ID&#44;타켓이름을 검색해보세요.">
+                    <a href="#" class="srch_btn"><span>search</span></a>
+                    <p class="srch_info">e.g&#32;KINP-T0123456K&#32;&#44;&#32;Acute myeloid leukaemia</p>
+                </div>
+    
+                <table style="width: 100%;" class="table0">
+                    <colgroup>
+                    <col style="width: 15%;">
+                    <col style="width: 13.33%;">
+                    <col style="width: 13.33%;">
+                    <col style="width: 13.33%;">
+                    <col style="width: 13.33%;">
+                    <col style="width: 13.33%;"> 
+                    <col style="width: 13.33%;">
+                    <col style="width: 5%;">
+                    </colgroup>
+                    <thead>
+                        <tr>
+                            <th>target ID</th>
+                            <th>source DB</th>
+                            <th>UpiProt ID</th>
+                            <th>target type</th>
+                            <th>target name</th>
+                            <th>target organism tax ID</th>
+                            <th>target organism</th>
+                            <th>
+                              <!-- 공백 -->
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>KINP-T0123456K</td>
+                            <td><a href="http://bidd.group/NPASS/target.php?target_id=NPT1666" target="_blank" class="dblink">NPASS : NPT1666</a></td>
+                            <td><a href="https://www.uniprot.org/uniprot/O75496" target="_blank" class="dblink">O75496</a></td>
+                            <td>IC50</td>
+                            <td>peritoneum cell</td>
+                            <td>1906665</td>
+                            <td>mouse</td>
+                            <td><img class="expand0" src="./img/content/full-screen_red.png" alt=""></td>   
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+
+            <!-- 질병정보 -->
+            <div class="info_wrap">
+                <div class="title">
+                    <span>peritoneum cell</span>
+                    <h4>과 연관된 질병</h4>
+                </div>
+    
+                <div class="small_title_box">
+                    <div class="small_title">
+                        <span>검색하신 타겟 </span>
+                        <h5>peritoneum cell</h5>
+                        <em>과 연관된</em>
+                        <h5>35</h5>
+                        <span>개의 질병이 발견되었습니다. </span>
+                    </div>
+        
+                    
+                </div>
+    
+                <table style="width: 100%;" id="diseaseList" class="table1">
+                    <colgroup>
+                    <col style="width: 16%;">
+                    <col style="width: 8%;">
+                    <col style="width: 18%;">
+                    <col style="width: 18%;">
+                    <col style="width: 18%;">
+                    <col style="width: 18%;">
+                    <col style="width: 4%;">
+                    </colgroup>
+                    <thead>
+                        <tr class="up">
+                            <th>
+                                <p>disease ID</p>
+                            </th>
+                            <th class="no-sort">
+                                <!-- 공백 -->
+                            </th>
+                            <th>
+                                <p>disease name</p>
+                                
+                            </th>
+                            <th class="no-sort">
+                                <p>disease code</p>
+                            </th>
+                            <th class="no-sort">
+                                <p>external DB</p>
+                            </th>
+                            <th>
+                                <p>disease score</p>
+                            </th>
+                            <th class="no-sort">
+                              <!-- 공백 -->
+                          </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr> 
+                            <td>KINP-D0123456K</td>
+                            <td><a href="disease.html" target="_blank" class="btnlink"><span>질병 <br> 정보보기</span></a>
+                              <a href="disease.html" target="_blank"> <img class="info" src="./img/content/page_red.png" alt=""></a></td>
+                            <td>Acute myeloid leukaemia</td>
+                            <td>ICD-11&#58;2A60</td>
+                            <td><a href="http://db.idrblab.net/ttd/search/ttd/disease?search_api_fulltext=Acute%20myeloid%20leukaemia" target="_blank" class="dblink">TTD</a></td>
+                            <td></td>
+                            <td><img class="expand1" src="./img/content/full-screen_red.png" alt=""></td>
+                        </tr>
+                        <tr>
+                          <td>KINP-D0123456K</td>
+                          <td><a href="disease.html" target="_blank" class="btnlink"><span>질병 <br> 정보보기</span></a>
+                            <a href="disease.html" target="_blank"> <img class="info" src="./img/content/page_red.png" alt=""></a></td>
+                          <td>Acute myeloid leukaemia</td>
+                          <td>ICD-11&#58;2A60</td>
+                          <td><a href="http://db.idrblab.net/ttd/search/ttd/disease?search_api_fulltext=Acute%20myeloid%20leukaemia" target="_blank" class="dblink">TTD</a></td>
+                          <td></td>
+                          <td><img class="expand2" src="./img/content/full-screen_red.png" alt=""></td>
+                      </tr>
+                        <tr>
+                            <td>KINP-D0123456K</td>
+                            <td><a href="disease.html" target="_blank" class="btnlink"><span>질병 <br> 정보보기</span></a>
+                              <a href="disease.html" target="_blank"> <img class="info" src="./img/content/page_red.png" alt=""></a></td>
+                            <td>Acute myeloid leukaemia</td>
+                            <td>ICD-11&#58;2A60</td>
+                            <td><a href="http://db.idrblab.net/ttd/search/ttd/disease?search_api_fulltext=Acute%20myeloid%20leukaemia" target="_blank" class="dblink">TTD</a></td>
+                            <td></td>
+                            <td><img class="expand3" src="./img/content/full-screen_red.png" alt=""></td>
+                        </tr>
+                        <tr>
+                            <td>KINP-D0123456K</td>
+                            <td><a href="disease.html" target="_blank" class="btnlink"><span>질병 <br> 정보보기</span></a>
+                              <a href="disease.html" target="_blank"> <img class="info" src="./img/content/page_red.png" alt=""></a></td>
+                            <td>Acute myeloid leukaemia</td>
+                            <td>ICD-11&#58;2A60</td>
+                            <td><a href="http://db.idrblab.net/ttd/search/ttd/disease?search_api_fulltext=Acute%20myeloid%20leukaemia" target="_blank" class="dblink">TTD</a></td>
+                            <td></td>
+                            <td><img class="expand4" src="./img/content/full-screen_red.png" alt=""></td>
+                        </tr>
+                        <tr>
+                            <td>KINP-D0123456K</td>
+                            <td><a href="disease.html" target="_blank" class="btnlink"><span>질병 <br> 정보보기</span></a>
+                              <a href="disease.html" target="_blank"> <img class="info" src="./img/content/page_red.png" alt=""></a></td>
+                            <td>Acute myeloid leukaemia</td>
+                            <td>ICD-11&#58;2A60</td>
+                            <td><a href="http://db.idrblab.net/ttd/search/ttd/disease?search_api_fulltext=Acute%20myeloid%20leukaemia" target="_blank" class="dblink">TTD</a></td>
+                            <td></td>
+                            <td><img class="expand5" src="./img/content/full-screen_red.png" alt=""></td>
+                          </tr>
+                    </tbody>
+                </table>
+    
+            </div>
+  
+
+       <!-- Pathway정보 -->
+       <div class="info_wrap">
+        <div class="title">
+            <span>peritoneum cell</span>
+            <h4>과 연관된 pathway</h4>
+        </div>
+
+        <div class="small_title_box">
+            <div class="small_title">
+                <span>검색하신 타겟 </span>
+                <h5>peritoneum cell</h5>
+                <em>과 연관된</em>
+                <h5>48</h5>
+                <span>개의 pathway가 발견되었습니다. </span>
+            </div>
+
+           
+        </div>
+
+        <table style="width: 100%;" id="pathwayList" class="table2">
+            <colgroup>
+            <col style="width: 47.5%;">
+            <col style="width: 47.5%;">
+            <col style="width: 5%;">
+            </colgroup>
+            <thead>
+                <tr class="up">
+                    <th>
+                        <p>pathway ID</p>
+                    </th>
+                    <th>
+                        <p>pathway name</p>
+                    </th>
+                    <th class="no-sort">
+                      <!-- 공백 -->
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><a href="https://www.wikipathways.org/index.php/Pathway:WP254" target="_blank" class="dblink">WP254</a></td>
+                    <td>TWEAK Signaling Pathway</td>
+                    <td><img class="expand6" src="./img/content/full-screen_red.png" alt=""></td>
+                </tr>
+                <tr>
+                    <td><a href="https://www.wikipathways.org/index.php/Pathway:WP254" target="_blank" class="dblink">WP254</a></td>
+                    <td>Apoptosis</td>
+                    <td><img class="expand7" src="./img/content/full-screen_red.png" alt=""></td>
+                </tr>
+                <tr>
+                    <td><a href="https://www.wikipathways.org/index.php/Pathway:WP254" target="_blank" class="dblink">WP254</a></td>
+                    <td>Apoptosis Modulation and Signaling</td>
+                    <td><img class="expand8" src="./img/content/full-screen_red.png" alt=""></td>
+                </tr>
+                <tr>
+                    <td><a href="https://www.wikipathways.org/index.php/Pathway:WP254" target="_blank" class="dblink">WP254</a></td>
+                    <td>Apoptotic execution phase</td>
+                    <td><img class="expand9" src="./img/content/full-screen_red.png" alt=""></td>                    
+                </tr>
+                <tr>
+                    <td><a href="https://www.wikipathways.org/index.php/Pathway:WP254" target="_blank" class="dblink">WP254</a></td>
+                    <td>TNF alpha Signaling Pathway</td>
+                    <td><img class="expand10" src="./img/content/full-screen_red.png" alt=""></td>  
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+
+
+            <!-- 타겟별 화합물 활성정보 -->
+            <div class="ref">
+                <div class="title">
+                    <h3>타겟별 화합물 활성정보</h3>
+                </div>
+                <!-- !!!!!!!!!!!!!!!!!!!!!!!!!!!문헌!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! -->
+                <div class="small_title_box_p">
+                    <div class="pill">
+                        <p>문헌</p>
+                    </div>
+        
+                    <div class="small_title_p">
+                      <span>검색하신 타겟 </span>
+                      <h5>peritoneum cell</h5>
+                      <em>과 연관된</em>
+                      <h5>37</h5>
+                      <span>개의 화합물 활성정보 입니다. </span>
+                    </div>
+        
+                </div>
+    
+                <table style="width: 100%;" id="refList" class="table3">
+                    <colgroup>
+                    <col style="width: 10%;">
+                    <col style="width: 7%;">
+                    <col style="width: 10%;">
+                    <col style="width: 8%;">
+                    <col style="width: 7%;">
+                    <col style="width: 8%;">
+                    <col style="width: 8%;">
+                    <col style="width: 8%;">
+                    <col style="width: 8%;">
+                    <col style="width: 8%;">
+                    <col style="width: 8%;">
+                    <col style="width: 8%;">
+                    <col style="width: 4%;">
+                    </colgroup>
+                    <thead>
+                      <tr class="up">
+                        <th>
+                            <p>chemical ID</p>
+                        </th>
+                        <th class="no-sort">
+                            <!-- 공백 -->
+                        <th>
+                            <p>chemical name</p>
+                        </th>
+                        <th class="no-sort">
+                            <p>activity property</p>
+                        </th>
+                        <th>
+                            <p>activity type</p>
+                        </th>
+                        <th class="no-sort">
+                            <p>activity relation</p>
+                        </th>
+                        <th>
+                            <p>activity value</p>
+                        </th>
+                        <th class="no-sort">
+                            <p>activity units</p>
+                        </th>
+                        <th class="no-sort">
+                            <p>assay organism</p>
+                        </th>
+                        <th class="no-sort">
+                            <p>assay tax ID</p>
+                        </th>
+                        <th class="no-sort">
+                            <p>ref info</p>
+                        </th>
+                        <th class="no-sort">
+                            <p>ref info type</p>
+                        </th>
+                        <th class="no-sort">
+                          <!-- 공백 -->
+                        </th>
+                    </thead>
+                    <tbody>
+                      <tr class="select on">
+                        <td>KINP-C0123456K</td>
+                        <td><a href="chemical.html" target="_blank" class="btnlink"><span>화합물<br>정보보기</span></a>
+                          <a href="chemical.html" target="_blank"> <img class="info" src="./img/content/page_red.png" alt=""></a></td>
+                        <td class="link_long">8-acetyl-3,4-dihydroxy-5,7-dimethoxy-2,2-dimethylchroman</td>
+                        <td>In Vitro (Efficacy)</td>
+                        <td>Potency</td>
+                        <td>&#61;</td>
+                        <td>25118.9</td>
+                        <td>nM</td>
+                        <td>Homo sapiens</td>
+                        <td>1906665</td>
+                        <td>63190995; Article; Luyen, Bui Thi Thuy; Tai, Bui Huu; Thao, Nguyen Phuong; Eun, Kim Ji; Cha, Ji Yun; Xin, Ming Jie; Lee, Young Mi; Kim, Young Ho; Bioorganic and Medicinal Chemistry Letters; vol. 24; 8; (2014); p. 1895 - 1900;</td>
+                        <td>Dastaset</td>
+                        <td><img class="expand11" src="./img/content/full-screen_red.png" alt=""></td>
+                      </tr>
+                      <tr class="select">
+                        <td>KINP-C0123456K</td>
+                        <td><a href="chemical.html" target="_blank" class="btnlink"><span>화합물<br>정보보기</span></a>
+                          <a href="chemical.html" target="_blank"> <img class="info" src="./img/content/page_red.png" alt=""></a></td>
+                        <td class="link_long">8-acetyl-3,4-dihydroxy-5,7-dimethoxy-2,2-dimethylchroman</td>
+                        <td>In Vitro (Efficacy)</td>
+                        <td>MIC</td>
+                        <td>&#62;</td>
+                        <td>128</td>
+                        <td>ug/ml</td>
+                        <td>Aspergillus terreus</td>
+                        <td>1906665</td>
+                        <td>63190995; Article; Luyen, Bui Thi Thuy; Tai, Bui Huu; Thao, Nguyen Phuong; Eun, Kim Ji; Cha, Ji Yun; Xin, Ming Jie; Lee, Young Mi; Kim, Young Ho; Bioorganic and Medicinal Chemistry Letters; vol. 24; 8; (2014); p. 1895 - 1900;</td>
+                        <td>PMID</td>
+                        <td><img class="expand12" src="./img/content/full-screen_red.png" alt=""></td>
+                      </tr>
+                      <tr class="select">
+                        <td>KINP-C0123456K</td>
+                        <td><a href="chemical.html" target="_blank" class="btnlink"><span>화합물<br>정보보기</span></a>
+                          <a href="chemical.html" target="_blank"> <img class="info" src="./img/content/page_red.png" alt=""></a></td>
+                        <td class="link_long">8-acetyl-3,4-dihydroxy-5,7-dimethoxy-2,2-dimethylchroman</td>
+                        <td>In Vitro (Efficacy)</td>
+                        <td>MIC</td>
+                        <td>&#61;</td>
+                        <td>128</td>
+                        <td>ug/ml</td>
+                        <td>human</td>
+                        <td>1906665</td>
+                        <td>63190995; Article; Luyen, Bui Thi Thuy; Tai, Bui Huu; Thao, Nguyen Phuong; Eun, Kim Ji; Cha, Ji Yun; Xin, Ming Jie; Lee, Young Mi; Kim, Young Ho; Bioorganic and Medicinal Chemistry Letters; vol. 24; 8; (2014); p. 1895 - 1900;63190995; Article; Luyen, Bui Thi Thuy; Tai, Bui Huu; Thao, Nguyen Phuong; Eun, Kim Ji; Cha, Ji Yun; Xin, Ming Jie; Lee, Young Mi; Kim, Young Ho; Bioorganic and Medicinal Chemistry Letters; vol. 24; 8; (2014); p. 1895 - 1900;</td>
+                        <td>PMID</td>
+                        <td><img class="expand13" src="./img/content/full-screen_red.png" alt=""></td>
+                      </tr>
+                      <tr class="select">
+                          <td>KINP-C0123456K</td>
+                          <td><a href="chemical.html" target="_blank" class="btnlink"><span>화합물<br>정보보기</span></a>
+                            <a href="chemical.html" target="_blank"> <img class="info" src="./img/content/page_red.png" alt=""></a></td>
+                          <td class="link_long">8-acetyl-3,4-dihydroxy-5,7-dimethoxy-2,2-dimethylchroman</td>
+                          <td>In Vitro (Efficacy)</td>
+                          <td>activity</td>
+                          <td>&#61;</td>
+                          <td>0.581</td>
+                          <td>%</td>
+                          <td>human</td>
+                          <td>1906665</td>
+                          <td>63190995; Article; Luyen, Bui Thi Thuy; Tai, Bui Huu; Thao, Nguyen Phuong; Eun, Kim Ji; Cha, Ji Yun; Xin, Ming Jie; Lee, Young Mi; Kim, Young Ho; Bioorganic and Medicinal Chemistry Letters; vol. 24; 8; (2014); p. 1895 - 1900;63190995; Article; Luyen, Bui Thi Thuy; Tai, Bui Huu; Thao, Nguyen Phuong; Eun, Kim Ji; Cha, Ji Yun; Xin, Ming Jie; Lee, Young Mi; Kim, Young Ho; Bioorganic and Medicinal Chemistry Letters; vol. 24; 8; (2014); p. 1895 - 1900;</td>
+                          <td>PMID</td>
+                          <td><img class="expand14" src="./img/content/full-screen_red.png" alt=""></td>
+                      </tr>
+                      <tr class="select">
+                        <td>KINP-C0123456K</td>
+                        <td><a href="chemical.html" target="_blank" class="btnlink"><span>화합물<br>정보보기</span></a>
+                          <a href="chemical.html" target="_blank"> <img class="info" src="./img/content/page_red.png" alt=""></a></td>
+                        <td class="link_long">8-acetyl-3,4-dihydroxy-5,7-dimethoxy-2,2-dimethylchroman</td>
+                        <td>In Vitro (Efficacy)</td>
+                        <td>IC50</td>
+                        <td>&#61;</td>
+                        <td>11600</td>
+                        <td>nM</td>
+                        <td>human</td>
+                        <td>1906665</td>
+                        <td>63190995; Article; Luyen, Bui Thi Thuy; Tai, Bui Huu; Thao, Nguyen Phuong; Eun, Kim Ji; Cha, Ji Yun; Xin, Ming Jie; Lee, Young Mi; Kim, Young Ho; Bioorganic and Medicinal Chemistry Letters; vol. 24; 8; (2014); p. 1895 - 1900;63190995; Article; Luyen, Bui Thi Thuy; Tai, Bui Huu; Thao, Nguyen Phuong; Eun, Kim Ji; Cha, Ji Yun; Xin, Ming Jie; Lee, Young Mi; Kim, Young Ho; Bioorganic and Medicinal Chemistry Letters; vol. 24; 8; (2014); p. 1895 - 1900;</td>
+                        <td>PMID</td>
+                        <td><img class="expand15" src="./img/content/full-screen_red.png" alt=""></td>
+                      </tr>
+                  </tbody>
+                </table>
+            </div>
+            
+
+            <!-- !!!!!!!!!!!!!!!!!!!!!!!!!!!예측!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! -->
+            <div class="fore">
+                <div class="small_title_box_p">
+                    <div class="pill">
+                        <p>예측</p>
+                    </div>
+        
+                    <div class="small_title_p">
+                        <span>검색하신 타겟</span>
+                        <h5>peritoneum cell</h5>
+                        <em>와 연관점수가 높은</em>
+                        <h5>32</h5>
+                        <em>개의 화합물 활성정보입니다.</em>
+                    </div>
+        
+                </div>
+    
+
+
+                <!-- 예측 체크 -->
+                
+                <div class="check">
+                  <input checked id="agree1" type="checkbox"> 
+                  <label for="agree1"> 
+                      <span>문헌정보 있는 것 모아보기</span>
+                  </label> 
+                  <input checked id="agree2" type="checkbox"> 
+                  <label for="agree2"> 
+                      <span>문헌정보 없는 것 모아보기</span>
+                  </label> 
+              </div>
+    
+                <table style="width: 100%;" id="foreList" class="table4">
+                    <colgroup>
+                    <col style="width: 11%;">
+                    <col style="width: 8%;">
+                    <col style="width: 10%;">
+                    <col style="width: 8%;">
+                    <col style="width: 8.2%;">
+                    <col style="width: 8.2%;">
+                    <col style="width: 8.2%;">
+                    <col style="width: 8.2%;">
+                    <col style="width: 8.2%;">
+                    <col style="width: 8.2%;">
+                    <col style="width: 8.2%;">
+                    <col style="width: 8.2%;">
+                    <col style="width: 4%;">
+                    </colgroup>
+                    <thead>
+                        <tr class="up">
+                            <th>
+                                <p>chemical ID</p>
+                            </th>
+                            
+                            <th class="no-sort">
+                                 <!-- 공백 -->
+                            </th>
+
+                            <th>
+                                <p>chemical name</p>
+                            </th>
+                            <th>
+                                <p>associate score</p>
+                            </th>
+                            <th class="no-sort">
+                                <p>activity property</p>
+                            </th>
+                            <th>
+                                <p>activity type</p>
+                            </th>
+                            <th class="no-sort">
+                                <p>activity relation</p>
+                            </th>
+                            <th>
+                                <p>activity value</p>
+                            </th>
+                            <th class="no-sort">
+                                <p>activity units</p>
+                            </th>
+                            <th class="no-sort">
+                                <p>ref info</p>
+                            </th>
+                            <th class="no-sort">
+                                <p>ref info type</p>
+                            </th>
+                            <th class="no-sort">
+                              <!-- 공백 -->
+                            </th>
+                            <th class="no-sort">
+                              <!-- 공백 -->
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr class="select">
+                          <td>KINP-C0123456K</td>
+                          <td><a href="chemical.html" target="_blank" class="btnlink"><span>화합물<br>정보보기</span></a>
+                            <a href="chemical.html" target="_blank"> <img class="info" src="./img/content/page_red.png" alt=""></a></td>
+                          <td class="link_long">8-acetyl-3,4-dihydroxy-5,7-dimethoxy-2,2-dimethylchroman</td>
+                          <td>0.98</td>
+                          <td>Other</td>
+                          <td>Potency</td>
+                          <td>&#61;</td>
+                          <td>25118.9</td>
+                          <td>nM</td>
+                          <td>63190995; Article; Luyen, Bui Thi Thuy; Tai, Bui Huu; Thao, Nguyen Phuong; Eun, Kim Ji; Cha, Ji Yun; Xin, Ming Jie; Lee, Young Mi; Kim, Young Ho; Bioorganic and Medicinal Chemistry Letters; vol. 24; 8; (2014); p. 1895 - 1900;63190995; Article; Luyen, Bui Thi Thuy; Tai, Bui Huu; Thao, Nguyen Phuong; Eun, Kim Ji; Cha, Ji Yun; Xin, Ming Jie; Lee, Young Mi; Kim, Young Ho; Bioorganic and Medicinal Chemistry Letters; vol. 24; 8; (2014); p. 1895 - 1900;</td>
+                          <td>Dataset</td>
+                          <td><a href="#" class="more-ref-c"><span>more ref<br>9 건</span></a>
+                            <a href="#" class="more_pathway_icon"><img src="./img/content/more_red.png" alt=""></a></td>
+                          <td><img class="expand16" src="./img/content/full-screen_red.png" alt=""></td>
+                        </tr>
+                        <tr class="select">
+                            <td>KINP-C0123456K</td>
+                            <td><a href="chemical.html" target="_blank" class="btnlink"><span>화합물<br>정보보기</span></a>
+                              <a href="chemical.html" target="_blank"> <img class="info" src="./img/content/page_red.png" alt=""></a></td>
+                            <td class="link_long">8-acetyl-3,4-dihydroxy-5,7-dimethoxy-2,2-dimethylchroman</td>
+                            <td>0.96</td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td><a href="#" class="more_pathway_icon"><img src="./img/content/more_red.png" alt=""></a></td>
+                            <td><img class="expand17" src="./img/content/full-screen_red.png" alt=""></td>
+                        </tr>
+                        <tr class="select">
+                          <td>KINP-C0123456K</td>
+                          <td><a href="chemical.html" target="_blank" class="btnlink"><span>화합물<br>정보보기</span></a>
+                            <a href="chemical.html" target="_blank"> <img class="info" src="./img/content/page_red.png" alt=""></a></td>
+                          <td class="link_long">8-acetyl-3,4-dihydroxy-5,7-dimethoxy-2,2-dimethylchroman</td>
+                          <td>0.96</td>
+                          <td></td>
+                          <td></td>
+                          <td></td>
+                          <td></td>
+                          <td></td>
+                          <td></td>
+                          <td></td>
+                          <td><a href="#" class="more_pathway_icon"><img src="./img/content/more_red.png" alt=""></a>
+                          </td>
+                          <td><img class="expand18" src="./img/content/full-screen_red.png" alt=""></td>
+                        </tr>
+                        <tr class="select">
+                          <td>KINP-C0123456K</td>
+                          <td><a href="chemical.html" target="_blank" class="btnlink"><span>화합물<br>정보보기</span></a>
+                            <a href="chemical.html" target="_blank"> <img class="info" src="./img/content/page_red.png" alt=""></a></td>
+                          <td class="link_long">8-acetyl-3,4-dihydroxy-5,7-dimethoxy-2,2-dimethylchroman</td>
+                          <td>0.95</td>
+                          <td></td>
+                          <td></td>
+                          <td></td>
+                          <td></td>
+                          <td></td>
+                          <td></td>
+                          <td></td>
+                          <td><a href="#" class="more_pathway_icon"><img src="./img/content/more_red.png" alt=""></a></td>
+                          <td><img class="expand19" src="./img/content/full-screen_red.png" alt=""></td>
+                        </tr>
+                        <tr class="select">
+                          <td>KINP-C0123456K</td>
+                          <td><a href="chemical.html" target="_blank" class="btnlink"><span>화합물<br>정보보기</span></a>
+                            <a href="chemical.html" target="_blank"> <img class="info" src="./img/content/page_red.png" alt=""></a></td>
+                          <td class="link_long">8-acetyl-3,4-dihydroxy-5,7-dimethoxy-2,2-dimethylchroman</td>
+                          <td>0.94</td>
+                          <td>Other</td>
+                          <td>Potency</td>
+                          <td>&#61;</td>
+                          <td>25118.9</td>
+                          <td>nM</td>
+                          <td>63190995; Article; Luyen, Bui Thi Thuy; Tai, Bui Huu; Thao, Nguyen Phuong; Eun, Kim Ji; Cha, Ji Yun; Xin, Ming Jie; Lee, Young Mi; Kim, Young Ho; Bioorganic and Medicinal Chemistry Letters; vol. 24; 8; (2014); p. 1895 - 1900;63190995; Article; Luyen, Bui Thi Thuy; Tai, Bui Huu; Thao, Nguyen Phuong; Eun, Kim Ji; Cha, Ji Yun; Xin, Ming Jie; Lee, Young Mi; Kim, Young Ho; Bioorganic and Medicinal Chemistry Letters; vol. 24; 8; (2014); p. 1895 - 1900;</td>
+                          <td>Dataset</td>
+                          <td><a href="#" class="more-ref-c"><span>more ref<br>9 건</span></a>
+                            <a href="#" class="more_pathway_icon"><img src="./img/content/more_red.png" alt=""></a></td>
+                          <td><img class="expand20" src="./img/content/full-screen_red.png" alt=""></td>
+                        </tr>
+                    </tbody>
+                </table>
+                <!-- 타겟별 화합물 활성정보의 예측테이블 안에 있는 more ref버튼 모달설정 -->
+                <div class="modal-wrapper" style="display: none;">
+                  <div class="modal">
+                      <table style="width: 100%;" class="table5">
+                          <colgroup>
+                          <col style="width: 10%;">
+                          <col style="width: 10%;">
+                          <col style="width: 8%;">
+                          <col style="width: 8%;">
+                          <col style="width: 8%;">
+                          <col style="width: 8%;">
+                          <col style="width: 8%;">
+                          <col style="width: 8%;">
+                          <col style="width: 8%;">
+                          <col style="width: 8%;">
+                          <col style="width: 4%;">
+                          </colgroup>
+                          <thead>
+                              <tr class="up">
+                                  <th>
+                                      <p>chemical ID</p>
+                                  </th>
+                                  <th>
+                                      <p>chemical name</p>
+                                  </th>
+                                  <th>
+                                      <p>associate score</p>
+                                  </th>
+                                  <th>
+                                      <p>activity property</p>
+                                  </th>
+                                  <th>
+                                      <p>activity type</p>
+                                  </th>
+                                  <th>
+                                      <p>activity relation</p>
+                                  </th>
+                                  <th>
+                                      <p>activity value</p>
+                                  </th>
+                                  <th>
+                                      <p>activity units</p>
+                                  </th>
+                                  <th>
+                                      <p>ref info</p>
+                                  </th>
+                                  <th>
+                                      <p>ref info type</p>
+                                  </th>
+                                  <th>
+                                      <img id="close" src="./img/content/close.png" alt="">
+                                  </th>
+                              </tr>
+                          </thead>
+                          <tbody>
+                              <tr>
+                                  <td>KINP-C0123456K</td>
+                                  <td>8-acetyl-3,4-dihydroxy-5,7-dimethoxy-2,2-dimethylchroman</td>
+                                  <td>0.98</td>
+                                  <td>Others</td>
+                                  <td>Potency</td>
+                                  <td>=</td>
+                                  <td>25118.9</td>
+                                  <td>nM</td>
+                                  <td>17166721</td>
+                                  <td>Dataset</td>
+                                  <td><img class="expand21" src="./img/content/full-screen_red.png" alt=""></td>
+                              </tr>
+                              <tr>
+                                  <td>KINP-C0123456K</td>
+                                  <td>8-acetyl-3,4-dihydroxy-5,7-dimethoxy-2,2-dimethylchroman</td>
+                                  <td>0.98</td>
+                                  <td>Others</td>
+                                  <td>Potency</td>
+                                  <td>=</td>
+                                  <td>25118.9</td>
+                                  <td>nM</td>
+                                  <td>17166721</td>
+                                  <td>Dataset</td>
+                                  <td><img class="expand22" src="./img/content/full-screen_red.png" alt=""></td>
+                              </tr>
+                              <tr>
+                                  <td>KINP-C0123456K</td>
+                                  <td>8-acetyl-3,4-dihydroxy-5,7-dimethoxy-2,2-dimethylchroman</td>
+                                  <td>0.98</td>
+                                  <td>Others</td>
+                                  <td>Potency</td>
+                                  <td>=</td>
+                                  <td>25118.9</td>
+                                  <td>nM</td>
+                                  <td>17166721</td>
+                                  <td>Dataset</td>
+                                  <td><img class="expand23" src="./img/content/full-screen_red.png" alt=""></td>
+                              </tr>
+                              <tr>
+                                  <td>KINP-C0123456K</td>
+                                  <td>8-acetyl-3,4-dihydroxy-5,7-dimethoxy-2,2-dimethylchroman</td>
+                                  <td>0.98</td>
+                                  <td>Others</td>
+                                  <td>Potency</td>
+                                  <td>=</td>
+                                  <td>25118.9</td>
+                                  <td>nM</td>
+                                  <td>17166721</td>
+                                  <td>Dataset</td>
+                                  <td><img class="expand24" src="./img/content/full-screen_red.png" alt=""></td>
+                              </tr>
+                              <tr>
+                                  <td>KINP-C0123456K</td>
+                                  <td>8-acetyl-3,4-dihydroxy-5,7-dimethoxy-2,2-dimethylchroman</td>
+                                  <td>0.98</td>
+                                  <td>Others</td>
+                                  <td>Potency</td>
+                                  <td>=</td>
+                                  <td>25118.9</td>
+                                  <td>nM</td>
+                                  <td>17166721</td>
+                                  <td>Dataset</td>
+                                  <td><img class="expand25" src="./img/content/full-screen_red.png" alt=""></td>
+                              </tr>
+                              <tr>
+                                  <td>KINP-C0123456K</td>
+                                  <td>8-acetyl-3,4-dihydroxy-5,7-dimethoxy-2,2-dimethylchroman</td>
+                                  <td>0.98</td>
+                                  <td>Others</td>
+                                  <td>Potency</td>
+                                  <td>=</td>
+                                  <td>25118.9</td>
+                                  <td>nM</td>
+                                  <td>17166721</td>
+                                  <td>Dataset</td>
+                                  <td><img class="expand26" src="./img/content/full-screen_red.png" alt=""></td>
+                              </tr>
+                              <tr>
+                                  <td>KINP-C0123456K</td>
+                                  <td>8-acetyl-3,4-dihydroxy-5,7-dimethoxy-2,2-dimethylchroman</td>
+                                  <td>0.98</td>
+                                  <td>Others</td>
+                                  <td>Potency</td>
+                                  <td>=</td>
+                                  <td>25118.9</td>
+                                  <td>nM</td>
+                                  <td>17166721</td>
+                                  <td>Dataset</td>
+                                  <td><img class="expand27" src="./img/content/full-screen_red.png" alt=""></td>
+                              </tr>
+                              <tr>
+                                  <td>KINP-C0123456K</td>
+                                  <td>8-acetyl-3,4-dihydroxy-5,7-dimethoxy-2,2-dimethylchroman</td>
+                                  <td>0.98</td>
+                                  <td>Others</td>
+                                  <td>Potency</td>
+                                  <td>=</td>
+                                  <td>25118.9</td>
+                                  <td>nM</td>
+                                  <td>17166721</td>
+                                  <td>Dataset</td>
+                                  <td><img class="expand28" src="./img/content/full-screen_red.png" alt=""></td>
+                              </tr>
+                              <tr>
+                                  <td>KINP-C0123456K</td>
+                                  <td>8-acetyl-3,4-dihydroxy-5,7-dimethoxy-2,2-dimethylchroman</td>
+                                  <td>0.98</td>
+                                  <td>Others</td>
+                                  <td>Potency</td>
+                                  <td>=</td>
+                                  <td>25118.9</td>
+                                  <td>nM</td>
+                                  <td>17166721</td>
+                                  <td>Dataset</td>
+                                  <td><img class="expand29" src="./img/content/full-screen_red.png" alt=""></td>
+                              </tr>
+                              <tr>
+                                  <td>KINP-C0123456K</td>
+                                  <td>8-acetyl-3,4-dihydroxy-5,7-dimethoxy-2,2-dimethylchroman</td>
+                                  <td>0.98</td>
+                                  <td>Others</td>
+                                  <td>Potency</td>
+                                  <td>=</td>
+                                  <td>25118.9</td>
+                                  <td>nM</td>
+                                  <td>17166721</td>
+                                  <td>Dataset</td>
+                                  <td><img class="expand30" src="./img/content/full-screen_red.png" alt=""></td>
+                              </tr>
+                          </tbody>
+                      </table>
+                  </div>
+                </div>
+            </div>
+
+
+
+           <!--천연물 -->
+            <div class="info_wrap">
+                <div class="title">
+                    <span>8-acetyl-3,4-dihydroxy-5,7-dimethoxy-2,2-dimethylchroman</span>
+                    <h4>가 포함된 천연물</h4>
+                </div>
+                <div class="small_title_box">
+                    <div class="small_title">
+                        <span>선택하신 화합물</span>
+                        <h5>8-acetyl-3,4-dihydroxy-5,7-dimethoxy-2,2-dimethylchroman</h5>
+                        <em>가 포함된</em>
+                        <h5>63</h5>
+                        <em>개의 천연물이 발견되었습니다.</em>
+                    </div>
+        
+                </div>
+
+                <table style="width: 100%;" id="orgList" class="table6">
+                    <colgroup>
+                    <col style="width: 12%;">
+                    <col style="width: 8%;">
+                    <col style="width: 13%;">
+                    <col style="width: 10%;">
+                    <col style="width: 12%;">
+                    <col style="width: 14%;">
+                    <col style="width: 13%;">
+                    <col style="width: 14%;">
+                    <col style="width: 4%;">
+                    </colgroup>
+                    <thead>
+                        <tr class="up">
+                            <th>
+                                <p>organism ID</p>
+                            </th>
+                            <th class="no-sort">
+                            <!-- 공백 -->
+                            </th>
+                            <th>
+                                <p>organism name</p>
+                            </th>
+                            <th class="no-sort">
+                                <p>organism tax level</p>
+                            </th>
+                            <th class="no-sort">
+                                <p>organism tax ID</p>
+                            </th>
+                            <th class="no-sort">
+                                <p>ref info</p>
+                            </th>
+                            <th class="no-sort">
+                              <p>ref info type</p>
+                          </th>
+                          <th class="no-sort">
+                            <p>comment</p>
+                        </th>
+                        <th class="no-sort">
+                          <!-- 공백 -->
+                          </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>KINP-N0123456K</td>
+                            <td><a href="organism.html" target="_blank" class="btnlink"><span>천연물<br>정보보기</span></a>
+                              <a href="organism.html" target="_blank"> <img class="info" src="./img/content/page_red.png" alt=""></a></td>
+                            <td>Astragalus flexuosus </td>
+                            <td>Species</td>
+                            <td>1234496</td>
+                            <td>73628026; Article; Wang, Lei; Qin, Wen; Tian, Li; Zhang, Xue-Xue; Lin, Fang; Cheng, Fan; Chen, Jian-Feng; Liu, Cheng-Xiong; Guo, Zhi-Yong; Proksch, Peter; Zou, Kun; Fitoterapia; vol. 127; (2018); p. 349 - 355;</td>
+                            <td>Reaxys</td>
+                            <td>whole plant of Carpesium abrotanoides L. (Compositae); collected in Changyangin, Hubei Province, China</td>
+                            <td><img class="expand31" src="./img/content/full-screen_red.png" alt=""></td>
+                        </tr>
+                        <tr>
+                          <td>KINP-N0123456K</td>
+                          <td><a href="organism.html" target="_blank" class="btnlink"><span>천연물<br>정보보기</span></a>
+                            <a href="organism.html" target="_blank"> <img class="info" src="./img/content/page_red.png" alt=""></a></td>
+                          <td>Astragalus flexuosus</td>
+                          <td>Species</td>
+                          <td>1234496</td>
+                          <td>73628026; Article; Wang, Lei; Qin, Wen; Tian, Li; Zhang, Xue-Xue; Lin, Fang; Cheng, Fan; Chen, Jian-Feng; Liu, Cheng-Xiong; Guo, Zhi-Yong; Proksch, Peter; Zou, Kun; Fitoterapia; vol. 127; (2018); p. 349 - 355;</td>
+                          <td>Reaxys</td>
+                          <td>whole plant of Carpesium abrotanoides L. (Compositae); collected in Changyangin, Hubei Province, China</td>
+                          <td><img class="expand32" src="./img/content/full-screen_red.png" alt=""></td>
+                        </tr>
+                        <tr>
+                          <td>KINP-N0123456K</td>
+                          <td><a href="organism.html" target="_blank" class="btnlink"><span>천연물<br>정보보기</span></a>
+                            <a href="organism.html" target="_blank"> <img class="info" src="./img/content/page_red.png" alt=""></a></td>
+                          <td>Astragalus flexuosus</td>
+                          <td>Species</td>
+                          <td>1234496</td>
+                          <td>73628026; Article; Wang, Lei; Qin, Wen; Tian, Li; Zhang, Xue-Xue; Lin, Fang; Cheng, Fan; Chen, Jian-Feng; Liu, Cheng-Xiong; Guo, Zhi-Yong; Proksch, Peter; Zou, Kun; Fitoterapia; vol. 127; (2018); p. 349 - 355;</td>
+                          <td>Reaxys</td>
+                          <td>whole plant of Carpesium abrotanoides L. (Compositae); collected in Changyangin, Hubei Province, China</td>
+                          <td><img class="expand33" src="./img/content/full-screen_red.png" alt=""></td>
+                        </tr>
+                        <tr>
+                          <td>KINP-N0123456K</td>
+                          <td><a href="organism.html" target="_blank" class="btnlink"><span>천연물<br>정보보기</span></a>
+                            <a href="organism.html" target="_blank"> <img class="info" src="./img/content/page_red.png" alt=""></a></td>
+                          <td>Astragalus flexuosus</td>
+                          <td>Species</td>
+                          <td>1234496</td>
+                          <td>73628026; Article; Wang, Lei; Qin, Wen; Tian, Li; Zhang, Xue-Xue; Lin, Fang; Cheng, Fan; Chen, Jian-Feng; Liu, Cheng-Xiong; Guo, Zhi-Yong; Proksch, Peter; Zou, Kun; Fitoterapia; vol. 127; (2018); p. 349 - 355;</td>
+                          <td>Reaxys</td>
+                          <td>whole plant of Carpesium abrotanoides L. (Compositae); collected in Changyangin, Hubei Province, China</td>
+                          <td><img class="expand34" src="./img/content/full-screen_red.png" alt=""></td>
+                        </tr>
+                        <tr>
+                          <td>KINP-N0123456K</td>
+                          <td><a href="organism.html" target="_blank" class="btnlink"><span>천연물<br>정보보기</span></a>
+                            <a href="organism.html" target="_blank"> <img class="info" src="./img/content/page_red.png" alt=""></a></td>
+                          <td>Astragalus flexuosus</td>
+                          <td>Species</td>
+                          <td>1234496</td>
+                          <td>73628026; Article; Wang, Lei; Qin, Wen; Tian, Li; Zhang, Xue-Xue; Lin, Fang; Cheng, Fan; Chen, Jian-Feng; Liu, Cheng-Xiong; Guo, Zhi-Yong; Proksch, Peter; Zou, Kun; Fitoterapia; vol. 127; (2018); p. 349 - 355;</td>
+                          <td>Reaxys</td>
+                          <td>whole plant of Carpesium abrotanoides L. (Compositae); collected in Changyangin, Hubei Province, China</td>
+                          <td><img class="expand35" src="./img/content/full-screen_red.png" alt=""></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+         
+        </div>
+ <!-- 푸터시작 -->
+ <footer class="footer">
+  <div class="f_t">
+    <div>
+        <a href="" class="f_logo"><img src="img/main/f_logo.png" alt=""></a>
+    </div>
+  </div>
+  <!-- 웹용 푸터 주소부분 설정 -->
+  <div class="f_b">
+    <div>
+        <div class="f_address"><p>(25451) 강원 강릉시 사임당로 679 KIST 강릉분원 천연물연구소  &emsp; | &emsp; Tel. 033-650-3416  &emsp; | &emsp;  Fax. 033-650-3419</p></div>
+        <div class="f_copyright"><p>COPYRIGHT ⓒ 2021 BY KIST ALL RIGHTS RESERVED</p></div>
+    </div>
+  </div>
+  <!-- 1024px 이하 버전 푸터 주소부분 설정 -->
+  <div class="f_b_1024">
+    <div>
+        <div class="f_address_1024"><p>(25451) 강원 강릉시 사임당로 679 KIST 강릉분원 천연물연구소 <br> Tel. 033-650-3416  &emsp; | &emsp;  Fax. 033-650-3419</p></div>
+        <div class="f_copyright_1024"><p>COPYRIGHT ⓒ 2021 BY KIST ALL RIGHTS RESERVED</p></div>
+    </div>
+  </div>
+
+  <div class="admin_log_btn">
+    <div>
+      <a href="#"><span>관리자</span></a>
+    </div>
+  </div>
+    </footer>
+    </div>
+</body>
+</html>
