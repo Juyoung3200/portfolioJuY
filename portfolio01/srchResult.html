@@ -1,0 +1,2083 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>추출물 등록/검색::해양생명자원 소재관리 시스템</title>
+
+  <!-- 제이쿼리 -->
+  <script src="http://code.jquery.com/jquery-latest.js"></script>
+
+  <!-- 제이쿼리UI -->
+  <script src="https://code.jquery.com/ui/1.13.1/jquery-ui.js"
+    integrity="sha256-6XMVI0zB8cRzfZjqKcD01PBsAy3FlDASrlC8SxCpInY=" crossorigin="anonymous"></script>
+
+  <!-- Bootstrap -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.1/umd/popper.min.js"></script>
+  <link href="./css/bootstrap.min.css" rel="stylesheet" />
+  <script src="./js/bootstrap.min.js"></script>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css" />
+
+  <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+  <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+  <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+      <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+
+  <!-- 달력 날짜 선택 -->
+  <script src="./js/bootstrap-datepicker.js"></script>
+  <script src="./js/bootstrap-datepicker.ko.js"></script>
+  <link rel="stylesheet" href="./css/bootstrap-datepicker.css">
+
+  <!-- 데이터테이블 연결 -->
+  <link rel="stylesheet" href="./css/jquery.dataTables.css" />
+  <script src="./js/jquery.dataTables.js"></script>
+
+  <!-- 데이터테이블 셀렉트 체크박스 -->
+  <script src="https://cdn.datatables.net/select/1.3.3/js/dataTables.select.min.js"></script>
+  <link rel="stylesheet" href="./css/select.dataTables.css" />
+
+  <!-- 외부스타일시트(부트스트랩 scss파일 컴파일 된 css) 연결 -->
+  <link rel="stylesheet" href="./css/myScss.css" />
+
+  <!-- 외부스크립트 연결 -->
+  <script src="./js/srchResult.js"></script>
+  <!-- XX_srch_organ.html 파일은 동일한 외부스크립트로 연결 -->
+</head>
+
+<body>
+  <div class="wrap">
+    <!-- header -->
+    <div class="header">
+      <!-- 유틸리티 메뉴바 -->
+
+      <!-- 로그인 하기 전 -->
+      <!--d-none으로 가려놓은 상태-->
+      <nav class="d-none navbar navbar-expand-lg navbar-dark bg-dark justify-content-end">
+        <div class="login-drop dropdown">
+          <a class="dropdown-toggle text-decoration-none text-white" id="dropdownSetting" data-toggle="dropdown"
+            aria-expanded="false" href="#">
+            <button class="btn btn-sm btn-light rounded-pill mr-2 px-3">
+              로그인
+            </button>
+          </a>
+          <div class="p-0 dropdown-menu dropdown-menu-right" aria-labelledby="dropdownSetting">
+            <div class="card" style="width: 28rem">
+              <div class="card-body">
+                <h5 class="card-title font-weight-bold">로그인</h5>
+                <p class="card-text">
+                  <small>가입하신 아이디와 비밀번호를 입력해주세요.</small>
+                </p>
+              </div>
+
+              <form class="form-signin mx-3">
+                <label for="inputEmail" class="sr-only">Email address</label>
+                <input type="text" id="inputID" class="form-control mb-1" placeholder="아이디" required="" autofocus="" />
+                <label for="inputPassword" class="sr-only">Password</label>
+                <input type="password" id="inputPassword" class="form-control" placeholder="비밀번호" required="" />
+                <div class="checkbox mt-2 mb-3" style="font-size: 12px">
+                  <label>
+                    <input type="checkbox" value="remember-me" /> 아이디 저장
+                  </label>
+                </div>
+                <button class="btn btn-lg btn-primary btn-block" type="submit">
+                  로그인
+                </button>
+              </form>
+
+              <div class="card-body">
+                <div class="d-flex justify-content-center">
+                  <button type="button" class="btn btn-success btn-sm rounded-pill mx-2 px-3">
+                    회원가입
+                  </button>
+                  <button type="button" class="btn btn-success btn-sm rounded-pill mx-2 px-3">
+                    아이디 찾기
+                  </button>
+                  <button type="button" class="btn btn-success btn-sm rounded-pill mx-2 px-3">
+                    비밀번호 찾기
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </nav>
+
+      <!-- 로그인 한 사용자가 일반회원일 때 -->
+      <!--d-none으로 가려놓은 상태-->
+      <nav class="d-none navbar navbar-expand-lg navbar-dark bg-dark justify-content-end">
+        <div class="dropdown">
+          <a class="dropdown-toggle text-decoration-none text-white" id="dropdownSetting" data-toggle="dropdown"
+            aria-expanded="false" href="#"><i class="bi bi-person-fill"></i> 홍길동 님</a>
+          <div class="p-0 dropdown-menu dropdown-menu-right" aria-labelledby="dropdownSetting">
+            <div class="card" style="width: 18rem">
+              <div class="card-body">
+                <h5 class="card-title font-weight-bold">마이페이지</h5>
+                <p class="card-text"><small>안녕하세요, 홍길동 님?</small></p>
+              </div>
+              <div class="card-body text-center bg-primary text-white">
+                <p>소속: 한국해양과학기술원</p>
+                <p class="mb-0">부서: 해양자원연구본부</p>
+              </div>
+              <ul class="list-group list-group-flush">
+                <li class="list-group-item">
+                  <button type="button" class="btn btn-outline-success btn-sm btn-block">
+                    <i class="bi bi-cart"></i> 장바구니
+                  </button>
+                </li>
+                <li class="list-group-item">
+                  <button type="button" class="btn btn-outline-success btn-sm btn-block">
+                    <i class="bi bi-file-earmark-text"></i> 분양내역
+                  </button>
+                </li>
+                <li class="list-group-item">
+                  <button type="button" class="btn btn-outline-success btn-sm btn-block">
+                    <i class="bi bi-pencil-square"></i> 회원가입정보
+                  </button>
+                </li>
+              </ul>
+              <div class="card-body">
+                <div class="d-flex justify-content-center">
+                  <button type="button" class="btn btn-success btn-sm rounded-pill mx-2 px-4">
+                    닫기
+                  </button>
+                  <button type="button" class="btn btn-success btn-sm rounded-pill mx-2 px-4">
+                    로그아웃
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </nav>
+
+      <!-- 로그인 한 사용자가 기관회원일 때 -->
+      <nav class="navbar navbar-expand-lg navbar-dark bg-dark justify-content-end">
+        <a href="./sp_srch_organ.html" role="button" class="btn btn-sm btn-outline-light rounded-pill mr-2 px-3">
+          통합관리시스템
+          <!--현재는 표본 등록/검색 페이지로 이동하지만, 본인이 담당하는 자원 등록/검색 페이지로 이동되게 기능구현해야 함-->
+        </a>
+        <div class="dropdown">
+          <a class="dropdown-toggle text-decoration-none text-white" id="dropdownSetting" data-toggle="dropdown"
+            aria-expanded="false" href="#"><i class="bi bi-person-fill"></i> 홍길동 님</a>
+          <div class="p-0 dropdown-menu dropdown-menu-right" aria-labelledby="dropdownSetting">
+            <div class="card" style="width: 18rem">
+              <div class="card-body">
+                <h5 class="card-title font-weight-bold">마이페이지</h5>
+                <p class="card-text"><small>안녕하세요, 홍길동 님?</small></p>
+              </div>
+              <div class="card-body text-center bg-primary text-white">
+                <p>기관: 국립해양생물자원관 (MABIK)</p>
+                <p class="mb-0">그룹: 자원관 자원관리그룹</p>
+              </div>
+              <ul class="list-group list-group-flush">
+                <li class="list-group-item">
+                  <button type="button" class="btn btn-outline-success btn-sm btn-block">
+                    <i class="bi bi-cart"></i> 분양 건 배송관리
+                  </button>
+                </li>
+                <li class="list-group-item">
+                  <button type="button" class="btn btn-outline-success btn-sm btn-block">
+                    <i class="bi bi-file-earmark-text"></i> 분양 검토 및 승인
+                  </button>
+                </li>
+                <li class="list-group-item">
+                  <button type="button" class="btn btn-outline-success btn-sm btn-block">
+                    <i class="bi bi-pencil-square"></i> 회원가입정보
+                  </button>
+                </li>
+              </ul>
+              <div class="card-body">
+                <div class="d-flex justify-content-center">
+                  <button type="button" class="btn btn-success btn-sm rounded-pill mx-2 px-4">
+                    닫기
+                  </button>
+                  <button type="button" class="btn btn-success btn-sm rounded-pill mx-2 px-4">
+                    로그아웃
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </nav>
+
+      <!-- GNB -->
+      <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand" href="./main.html"><img style="max-width: 300px" src="./img/header/logo_h.png"
+            alt="로고" /></a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+          aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav justify-content-end">
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
+                aria-expanded="false">
+                소개
+              </a>
+              <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                <a class="dropdown-item" href="#">시스템 소개</a>
+                <a class="dropdown-item" href="#">분양 안내</a>
+                <a class="dropdown-item" href="#">자원 현황</a>
+              </div>
+            </li>
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
+                aria-expanded="false">
+                추출물
+              </a>
+              <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                <a class="dropdown-item" href="#">추출물 검색/분양</a>
+                <a class="dropdown-item" href="#">활성자원 검색</a>
+              </div>
+            </li>
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
+                aria-expanded="false">
+                미생물
+              </a>
+              <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                <a class="dropdown-item" href="#">미생물 검색/분양</a>
+              </div>
+            </li>
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
+                aria-expanded="false">
+                미세조류
+              </a>
+              <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                <a class="dropdown-item" href="#">미세조류 검색/분양</a>
+              </div>
+            </li>
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
+                aria-expanded="false">
+                유전자원
+              </a>
+              <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                <a class="dropdown-item" href="#">유전자원 검색/분양</a>
+              </div>
+            </li>
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
+                aria-expanded="false">
+                분석서비스
+              </a>
+              <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                <a class="dropdown-item" href="#">빅데이터 분석 현황</a>
+              </div>
+            </li>
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
+                aria-expanded="false">
+                고객센터
+              </a>
+              <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                <a class="dropdown-item" href="#">공지사항</a>
+                <a class="dropdown-item" href="#">게시판</a>
+                <a class="dropdown-item" href="#">FAQ</a>
+                <a class="dropdown-item" href="#">Q&A</a>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </nav>
+    </div>
+    <!--header 닫히는 div-->
+
+    <!-- 검색창 -->
+    <div class="srchResult bg-primary p-5">
+      <!-- 검색창 타이틀 -->
+      <h2 class="text-center text-white font-weight-bold pt-4 pb-4">검색 결과</h2>
+      <!-- 검색 후 자원 정보 텍스트  -->
+      <p class="text-center text-white pb-2" style="font-size:22px;"><span class="text-warning">미역</span>에 대한 검색결과는 총 <span class="text-warning">72</span>건 입니다.</p>
+      <!-- 검색창 부분 -->
+      <div class="input-group px-5 pb-5">
+        <input type="text" class="ml-5 form-control form-control-lg" placeholder="학명 또는 국명을 입력해 주세요."
+          aria-label="Recipient's username with two button addons" aria-describedby="button-addon4"/>
+          <button type="button" class="px-4 mr-5 btn btn-success">
+            <i class="bi bi-search"></i>
+          </button>
+      </div>
+    </div>
+    <!-- contents -->
+    <div class="container" style="min-height: 100vh">
+
+      <div class="float-left">
+        <span class="rounded-pill bg-success text-white p-2 px-3">해양 추출물</span>
+        <span class="pl-2">검색하신 <strong>미역 4</strong>건이 검색되었습니다.</span>
+      </div>
+      <!-- 추출물 테이블 정보 -->
+      <div class="d-flex justify-content-end mt-sm-5 mb-sm-3">
+        <button class="btn btn-success px-4" type="button">
+           더보기
+        </button>
+      </div>
+      <!-- 테이블 -->
+      <div class="mb-5">
+        <table class="table table-hover mb-0 text-center" id="ex_srchResult_table">
+          <thead>
+            <tr class="table-primary">
+              <th>No.</th>
+              <th>자원번호</th>
+              <th>학명</th>
+              <th>국명</th>
+              <th>분류유형</th>
+              <th>채집주소</th>
+              <th>채집일자</th>
+              <th>추출용매</th>
+              <th>추출방법</th>
+              <th>추출부위</th>
+              <th>분양수량</th>
+              <th>분양상태</th>
+              <th>장바구니</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>1</td>
+              <td>
+                MABIK NP60150005 <br />
+                <button type="button" class="btn btn-primary btn-sm px-5 py-0" data-toggle="modal"
+                  data-target="#ex_detailView">
+                  상세보기
+                </button>
+              </td>
+              <td>Sonchus brachyotus</td>
+              <td>사데풀</td>
+              <td>염생식물</td>
+              <td>대한민국 인천광역시 강화군 삼산면</td>
+              <td>2015-08-25</td>
+              <td>70% EtOH</td>
+              <td>초음파</td>
+              <td>전체</td>
+              <td>20mg</td>
+              <td>분양불가</td>
+              <td></td>
+            </tr>
+            <tr>
+              <td>2</td>
+              <td>
+                MABIK NP60150005 <br />
+                <button type="button" class="btn btn-primary btn-sm px-5 py-0" data-toggle="modal"
+                  data-target="#ex_detailView">
+                  상세보기
+                </button>
+              </td>
+              <td>Sonchus brachyotus</td>
+              <td>사데풀</td>
+              <td>염생식물</td>
+              <td>대한민국 인천광역시 강화군 삼산면</td>
+              <td>2015-08-25</td>
+              <td>70% EtOH</td>
+              <td>초음파</td>
+              <td>전체</td>
+              <td>20mg</td>
+              <td>분양불가</td>
+              <td></td>
+            </tr>
+            <tr>
+              <td>3</td>
+              <td>
+                MABIK NP60150005 <br />
+                <button type="button" class="btn btn-primary btn-sm px-5 py-0" data-toggle="modal"
+                  data-target="#ex_detailView">
+                  상세보기
+                </button>
+              </td>
+              <td>Sonchus brachyotus</td>
+              <td>사데풀</td>
+              <td>염생식물</td>
+              <td>대한민국 인천광역시 강화군 삼산면</td>
+              <td>2015-08-25</td>
+              <td>70% EtOH</td>
+              <td>초음파</td>
+              <td>전체</td>
+              <td>20mg</td>
+              <td>분양불가</td>
+              <td></td>
+            </tr>
+            <tr>
+              <td>4</td>
+              <td>
+                MABIK NP60150005 <br />
+                <button type="button" class="btn btn-primary btn-sm px-5 py-0" data-toggle="modal"
+                  data-target="#ex_detailView">
+                  상세보기
+                </button>
+              </td>
+              <td>Sonchus brachyotus</td>
+              <td>사데풀</td>
+              <td>염생식물</td>
+              <td>대한민국 인천광역시 강화군 삼산면</td>
+              <td>2015-08-25</td>
+              <td>70% EtOH</td>
+              <td>초음파</td>
+              <td>전체</td>
+              <td>20mg</td>
+              <td>분양불가</td>
+              <td></td>
+            </tr>
+            <tr>
+              <td>5</td>
+              <td>
+                MABIK NP60150005 <br />
+                <button type="button" class="btn btn-primary btn-sm px-5 py-0" data-toggle="modal"
+                  data-target="#ex_detailView">
+                  상세보기
+                </button>
+              </td>
+              <td>Sonchus brachyotus</td>
+              <td>사데풀</td>
+              <td>염생식물</td>
+              <td>대한민국 인천광역시 강화군 삼산면</td>
+              <td>2015-08-25</td>
+              <td>70% EtOH</td>
+              <td>초음파</td>
+              <td>전체</td>
+              <td>20mg</td>
+              <td>분양불가</td>
+              <td></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <!-- 상세보기 모달 -->
+      <div class="modal fade" id="ex_detailView" tabindex="-1" aria-labelledby="detailViewTitle" aria-modal="true"
+        role="dialog">
+        <div class="modal-dialog modal-lg modal-dialog-scrollable">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title font-weight-bold" id="exampleModalScrollableTitle">
+                <i class="bi bi-circle-fill text-secondary"></i> 추출물 상세보기
+              </h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">×</span>
+              </button>
+            </div>
+            <div class="modal-body m-2">
+              <div class="card mb-2">
+                <div class="row no-gutters">
+                  <div class="col-md-4 bg-light d-flex align-items-center justify-content-center">
+                    <h5 class="m-0">자원정보</h5>
+                  </div>
+                  <div class="col-md-8">
+                    <div class="card-body">
+                      <p class="mb-0">
+                        <strong>공개타입 :</strong> 대민공개 <br>
+                        <strong>실물자원보유 :</strong> Y <br>
+                        <strong>이관대상여부 :</strong> <br>
+                        <strong>사업명 :</strong> 해양천연물라이브러리 구축을 위한 기반연구 - 해양바이오산업화 헬프데스크 <br>
+                        <strong>반입내용 :</strong> 채집 <br>
+                        <strong>임시번호 :</strong> NP-0087 <br>
+                        <strong>자원번호 :</strong> MABIK NP60150005 <br>
+                        <strong>제공(등록)자 :</strong> <br>
+                        <strong>제공(등록)기관 :</strong> <br>
+                        <strong>관리기관 :</strong> 국립해양생물자원관 <br>
+                        <strong>수장위치 :</strong> NP-DF01-1-4-4-1
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="card mb-2">
+                <div class="row no-gutters">
+                  <div class="col-md-4 bg-light d-flex align-items-center justify-content-center">
+                    <h5 class="m-0">동정상태</h5>
+                  </div>
+                  <div class="col-md-8">
+                    <div class="card-body">
+                      <p class="mb-0">
+                        <strong>동정여부 :</strong> <br>
+                        <strong>미동정학명 :</strong> <br>
+                        <strong>동정일자 :</strong> <br>
+                        <strong>동정자 :</strong>
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="card mb-2">
+                <div class="row no-gutters">
+                  <div class="col-md-4 bg-light d-flex align-items-center justify-content-center">
+                    <h5 class="m-0">확증자원</h5>
+                  </div>
+                  <div class="col-md-8">
+                    <div class="card-body">
+                      <p class="mb-0">
+                        <strong>확증자원번호 :</strong> <br>
+                        <strong>확증자원유형 :</strong>
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="card mb-2">
+                <div class="row no-gutters">
+                  <div class="col-md-4 bg-light d-flex align-items-center justify-content-center">
+                    <h5 class="m-0">생물종</h5>
+                  </div>
+                  <div class="col-md-8">
+                    <div class="card-body">
+                      <p class="mb-0">
+                        <strong>학명 :</strong> Sonchus brachyotus <br>
+                        <strong>국명 :</strong> 사데풀 <br>
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="card mb-2">
+                <div class="row no-gutters">
+                  <div class="col-md-4 bg-light d-flex align-items-center justify-content-center">
+                    <h5 class="m-0">추출물정보</h5>
+                  </div>
+                  <div class="col-md-8">
+                    <div class="card-body">
+                      <p class="mb-0">
+                        <strong>생물분류 :</strong> 염생식물 <br>
+                        <strong>추출부위 :</strong> 전체 <br>
+                        <strong>추출용매 :</strong> 70% EtOH <br>
+                        <strong>추출방법 :</strong> 초음파 <br>
+                        <strong>추출물무게(g) :</strong> 410.5 <br>
+                        <strong>생체시료무게(g/l) :</strong> 1595.5 <br>
+                        <strong>추출수율(%) :</strong> 25.73 <br>
+                        <strong>추출횟수 :</strong> 8
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="card mb-2">
+                <div class="row no-gutters">
+                  <div class="col-md-4 bg-light d-flex align-items-center justify-content-center">
+                    <h5 class="m-0">분양상태</h5>
+                  </div>
+                  <div class="col-md-8">
+                    <div class="card-body">
+                      <p class="mb-0">
+                        <strong>분양상태 :</strong> 분양가능 <br>
+                        <strong>분양불가사유 :</strong>
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="card mb-2">
+                <div class="row no-gutters">
+                  <div class="col-md-4 bg-light d-flex align-items-center justify-content-center">
+                    <h5 class="m-0">재고관리</h5>
+                  </div>
+                  <div class="col-md-8">
+                    <div class="card-body">
+                      <p class="mb-0">
+                        <strong>재고량 :</strong> 1000mg <br>
+                        <strong>영구보존수량 :</strong> 200mg <br>
+                        <strong>폐기수량 :</strong> 0mg <br>
+                        <strong>분양수량 :</strong> 20mg <br>
+                        <strong>품질테스트수량 :</strong>
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="card mb-2">
+                <div class="row no-gutters">
+                  <div class="col-md-4 bg-light d-flex align-items-center justify-content-center">
+                    <h5 class="m-0">채집정보</h5>
+                  </div>
+                  <div class="col-md-8">
+                    <div class="card-body">
+                      <p class="mb-0">
+                        <strong>채집일자 :</strong> 2015-08-25<br>
+                        <strong>채집기관 :</strong> <br>
+                        <strong>채집자 : </strong>
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="card mb-2">
+                <div class="row no-gutters">
+                  <div class="col-md-4 bg-light d-flex align-items-center justify-content-center">
+                    <h5 class="m-0">채집지</h5>
+                  </div>
+                  <div class="col-md-8">
+                    <div class="card-body">
+                      <p class="mb-0">
+                        <strong>위도 :</strong> 37° 39' 12.85" N<br>
+                        <strong>경도 :</strong> 126° 20' 20.93" E<br>
+                        <strong>국가 : </strong> 대한민국<br>
+                        <strong>해역 :</strong> <br>
+                        <strong>주소 :</strong> 대한민국 인청광역시 강화군 삼산면<br>
+                        <strong>상세주소 :</strong><br>
+                        <strong>주소(영문) :</strong>
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="card mb-2">
+                <div class="row no-gutters">
+                  <div class="col-md-4 bg-light d-flex align-items-center justify-content-center">
+                    <h5 class="m-0">Note</h5>
+                  </div>
+                  <div class="col-md-8">
+                    <div class="card-body">
+                      <p class="mb-0">
+
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-success px-4">인쇄</button>
+              <button type="button" class="btn btn-delete text-white px-4" data-dismiss="modal">
+                닫기
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+<!-- -------------------------------------------------------------------------------- -->
+      <div class="float-left">
+        <span class="rounded-pill bg-success text-white p-2 px-3">해양 미생물</span>
+        <span class="pl-2">검색하신 <strong>미역 4</strong>건이 검색되었습니다.</span>
+      </div>
+      <!-- 미생물 테이블 정보 -->
+      <div class="d-flex justify-content-end mt-sm-5 mb-sm-3">
+        <button class="btn btn-success px-4" type="button">
+           더보기
+        </button>
+      </div>
+      <!-- 테이블 -->
+      <div class="mb-5">
+        <table class="table table-hover mb-0 text-center w-100" id="ml_srchResult_table">
+          <thead>
+            <tr class="table-primary">
+              <th>No.</th>
+              <th>자원번호</th>
+              <th>관리기관</th>
+              <th>분류유형</th>
+              <th>학명</th>
+              <th>해역</th>
+              <th>분리원</th>
+              <th>분양상태</th>
+              <th>장바구니</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>1</td>
+              <td>
+                MABIK FU00000000 <br />
+                <button type="button" class="btn btn-primary btn-sm px-5 py-0" data-toggle="modal"
+                  data-target="#ml_detailView">
+                  상세보기
+                </button>
+              </td>
+              <td>국립해양생물자원관</td>
+              <td>세균</td>
+              <td>Add cdd</td>
+              <td>서해</td>
+              <td>해수</td>
+              <td>분양가능</td>
+              <td></td>
+            </tr>
+            <tr>
+              <td>2</td>
+              <td>
+                MABIK FU00000000 <br />
+                <button type="button" class="btn btn-primary btn-sm px-5 py-0" data-toggle="modal"
+                  data-target="#ml_detailView">
+                  상세보기
+                </button>
+              </td>
+              <td>국립해양생물자원관</td>
+              <td>세균</td>
+              <td>Add cdd</td>
+              <td>서해</td>
+              <td>해수</td>
+              <td>분양가능</td>
+              <td></td>
+            </tr>
+            <tr>
+              <td>3</td>
+              <td>
+                MABIK FU00000000 <br />
+                <button type="button" class="btn btn-primary btn-sm px-5 py-0" data-toggle="modal"
+                  data-target="#ml_detailView">
+                  상세보기
+                </button>
+              </td>
+              <td>국립해양생물자원관</td>
+              <td>세균</td>
+              <td>Add cdd</td>
+              <td>서해</td>
+              <td>해수</td>
+              <td>분양가능</td>
+              <td></td>
+            </tr>
+            <tr>
+              <td>4</td>
+              <td>
+                MABIK FU00000000 <br />
+                <button type="button" class="btn btn-primary btn-sm px-5 py-0" data-toggle="modal"
+                  data-target="#ml_detailView">
+                  상세보기
+                </button>
+              </td>
+              <td>국립해양생물자원관</td>
+              <td>세균</td>
+              <td>Add cdd</td>
+              <td>서해</td>
+              <td>해수</td>
+              <td>분양가능</td>
+              <td></td>
+            </tr>
+            <tr>
+              <td>5</td>
+              <td>
+                MABIK FU00000000 <br />
+                <button type="button" class="btn btn-primary btn-sm px-5 py-0" data-toggle="modal"
+                  data-target="#ml_detailView">
+                  상세보기
+                </button>
+              </td>
+              <td>국립해양생물자원관</td>
+              <td>세균</td>
+              <td>Add cdd</td>
+              <td>서해</td>
+              <td>해수</td>
+              <td>분양가능</td>
+              <td></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <!-- 상세보기 모달 -->
+      <div class="modal fade" id="ml_detailView" tabindex="-1" aria-labelledby="detailViewTitle" aria-modal="true"
+        role="dialog">
+        <div class="modal-dialog modal-lg modal-dialog-scrollable">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title font-weight-bold" id="exampleModalScrollableTitle">
+                <i class="bi bi-circle-fill text-secondary"></i> 미생물 상세보기
+              </h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">×</span>
+              </button>
+            </div>
+            <div class="modal-body m-2">
+              <div class="card mb-2">
+                <div class="row no-gutters">
+                  <div class="col-md-4 bg-light d-flex align-items-center justify-content-center">
+                    <h5 class="m-0">자원정보</h5>
+                  </div>
+                  <div class="col-md-8">
+                    <div class="card-body">
+                      <p class="mb-0">
+                        <strong>공개타입 :</strong> 대민공개 <br>
+                        <strong>실물자원보유 :</strong> Y <br>
+                        <strong>이관대상여부 :</strong> <br>
+                        <strong>사업명 :</strong> 해양천연물라이브러리 구축을 위한 기반연구 - 해양바이오산업화 헬프데스크 <br>
+                        <strong>반입내용 :</strong> 채집 <br>
+                        <strong>임시번호 :</strong> NP-0087 <br>
+                        <strong>자원번호 :</strong> MABIK NP60150005 <br>
+                        <strong>제공(등록)자 :</strong> <br>
+                        <strong>제공(등록)기관 :</strong> <br>
+                        <strong>관리기관 :</strong> 국립해양생물자원관 <br>
+                        <strong>수장위치 :</strong> NP-DF01-1-4-4-1
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="card mb-2">
+                <div class="row no-gutters">
+                  <div class="col-md-4 bg-light d-flex align-items-center justify-content-center">
+                    <h5 class="m-0">동정상태</h5>
+                  </div>
+                  <div class="col-md-8">
+                    <div class="card-body">
+                      <p class="mb-0">
+                        <strong>동정여부 :</strong> <br>
+                        <strong>미동정학명 :</strong> <br>
+                        <strong>동정일자 :</strong> <br>
+                        <strong>동정자 :</strong>
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="card mb-2">
+                <div class="row no-gutters">
+                  <div class="col-md-4 bg-light d-flex align-items-center justify-content-center">
+                    <h5 class="m-0">확증자원</h5>
+                  </div>
+                  <div class="col-md-8">
+                    <div class="card-body">
+                      <p class="mb-0">
+                        <strong>확증자원번호 :</strong> <br>
+                        <strong>확증자원유형 :</strong>
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="card mb-2">
+                <div class="row no-gutters">
+                  <div class="col-md-4 bg-light d-flex align-items-center justify-content-center">
+                    <h5 class="m-0">생물종</h5>
+                  </div>
+                  <div class="col-md-8">
+                    <div class="card-body">
+                      <p class="mb-0">
+                        <strong>학명 :</strong> Sonchus brachyotus <br>
+                        <strong>국명 :</strong> 사데풀 <br>
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="card mb-2">
+                <div class="row no-gutters">
+                  <div class="col-md-4 bg-light d-flex align-items-center justify-content-center">
+                    <h5 class="m-0">추출물정보</h5>
+                  </div>
+                  <div class="col-md-8">
+                    <div class="card-body">
+                      <p class="mb-0">
+                        <strong>생물분류 :</strong> 염생식물 <br>
+                        <strong>추출부위 :</strong> 전체 <br>
+                        <strong>추출용매 :</strong> 70% EtOH <br>
+                        <strong>추출방법 :</strong> 초음파 <br>
+                        <strong>추출물무게(g) :</strong> 410.5 <br>
+                        <strong>생체시료무게(g/l) :</strong> 1595.5 <br>
+                        <strong>추출수율(%) :</strong> 25.73 <br>
+                        <strong>추출횟수 :</strong> 8
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="card mb-2">
+                <div class="row no-gutters">
+                  <div class="col-md-4 bg-light d-flex align-items-center justify-content-center">
+                    <h5 class="m-0">분양상태</h5>
+                  </div>
+                  <div class="col-md-8">
+                    <div class="card-body">
+                      <p class="mb-0">
+                        <strong>분양상태 :</strong> 분양가능 <br>
+                        <strong>분양불가사유 :</strong>
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="card mb-2">
+                <div class="row no-gutters">
+                  <div class="col-md-4 bg-light d-flex align-items-center justify-content-center">
+                    <h5 class="m-0">재고관리</h5>
+                  </div>
+                  <div class="col-md-8">
+                    <div class="card-body">
+                      <p class="mb-0">
+                        <strong>재고량 :</strong> 1000mg <br>
+                        <strong>영구보존수량 :</strong> 200mg <br>
+                        <strong>폐기수량 :</strong> 0mg <br>
+                        <strong>분양수량 :</strong> 20mg <br>
+                        <strong>품질테스트수량 :</strong>
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="card mb-2">
+                <div class="row no-gutters">
+                  <div class="col-md-4 bg-light d-flex align-items-center justify-content-center">
+                    <h5 class="m-0">채집정보</h5>
+                  </div>
+                  <div class="col-md-8">
+                    <div class="card-body">
+                      <p class="mb-0">
+                        <strong>채집일자 :</strong> 2015-08-25<br>
+                        <strong>채집기관 :</strong> <br>
+                        <strong>채집자 : </strong>
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="card mb-2">
+                <div class="row no-gutters">
+                  <div class="col-md-4 bg-light d-flex align-items-center justify-content-center">
+                    <h5 class="m-0">채집지</h5>
+                  </div>
+                  <div class="col-md-8">
+                    <div class="card-body">
+                      <p class="mb-0">
+                        <strong>위도 :</strong> 37° 39' 12.85" N<br>
+                        <strong>경도 :</strong> 126° 20' 20.93" E<br>
+                        <strong>국가 : </strong> 대한민국<br>
+                        <strong>해역 :</strong> <br>
+                        <strong>주소 :</strong> 대한민국 인청광역시 강화군 삼산면<br>
+                        <strong>상세주소 :</strong><br>
+                        <strong>주소(영문) :</strong>
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="card mb-2">
+                <div class="row no-gutters">
+                  <div class="col-md-4 bg-light d-flex align-items-center justify-content-center">
+                    <h5 class="m-0">Note</h5>
+                  </div>
+                  <div class="col-md-8">
+                    <div class="card-body">
+                      <p class="mb-0">
+
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-success px-4">인쇄</button>
+              <button type="button" class="btn btn-delete text-white px-4" data-dismiss="modal">
+                닫기
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+<!-- -------------------------------------------------------------------------------- -->
+      <div class="float-left">
+        <span class="rounded-pill bg-success text-white p-2 px-3">해양 유전자원(조직)</span>
+        <span class="pl-2">검색하신 <strong>미역 4</strong>건이 검색되었습니다.</span>
+      </div>
+      <!-- 유전자원 테이블 정보1 TI -->
+      <div class="d-flex justify-content-end mt-sm-5 mb-sm-3">
+        <button class="btn btn-success px-4" type="button">
+            더보기
+        </button>
+      </div>
+      <!-- 테이블 -->
+      <div class="mb-5">
+        <table class="table table-hover mb-0 text-center" id="geTi_srchResult_table">
+          <thead>
+            <tr class="table-primary">
+              <th>No.</th>
+              <th>자원번호</th>
+              <th>관리기관</th>
+              <th>학명</th>
+              <th>국명</th>
+              <th>조직유형</th>
+              <th>보존방법</th>
+              <th>보존용액</th>
+              <th>채집주소</th>
+              <th>채집일자</th>
+              <th>분양상태</th>
+              <th>분양수량</th>
+              <th>장바구니</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>1</td>
+              <td>
+                MABIK TI00004021 <br />
+                <button type="button" class="btn btn-primary btn-sm px-5 py-0" data-toggle="modal"
+                  data-target="#geTi_detailView">
+                  상세보기
+                </button>
+              </td>
+              <td>국립해양생물자원관</td>
+              <td>Sepia esculenta</td>
+              <td>참갑오징어</td>
+              <td>근육</td>
+              <td>'-80℃ 초저온냉동</td>
+              <td>99.9% EtOH</td>
+              <td>대한민국 충청남도</td>
+              <td>2020-06-24</td>
+              <td>분양가능</td>
+              <td>5 vial</td>
+              <td></td>
+            </tr>
+            <tr>
+              <td>1</td>
+              <td>
+                MABIK TI00004021 <br />
+                <button type="button" class="btn btn-primary btn-sm px-5 py-0" data-toggle="modal"
+                  data-target="#geTi_detailView">
+                  상세보기
+                </button>
+              </td>
+              <td>국립해양생물자원관</td>
+              <td>Sepia esculenta</td>
+              <td>참갑오징어</td>
+              <td>근육</td>
+              <td>'-80℃ 초저온냉동</td>
+              <td>99.9% EtOH</td>
+              <td>대한민국 충청남도</td>
+              <td>2020-06-24</td>
+              <td>분양가능</td>
+              <td>5 vial</td>
+              <td></td>
+            </tr>
+            <tr>
+              <td>1</td>
+              <td>
+                MABIK TI00004021 <br />
+                <button type="button" class="btn btn-primary btn-sm px-5 py-0" data-toggle="modal"
+                  data-target="#geTi_detailView">
+                  상세보기
+                </button>
+              </td>
+              <td>국립해양생물자원관</td>
+              <td>Sepia esculenta</td>
+              <td>참갑오징어</td>
+              <td>근육</td>
+              <td>'-80℃ 초저온냉동</td>
+              <td>99.9% EtOH</td>
+              <td>대한민국 충청남도</td>
+              <td>2020-06-24</td>
+              <td>분양가능</td>
+              <td>5 vial</td>
+              <td></td>
+            </tr>
+            <tr>
+              <td>1</td>
+              <td>
+                MABIK TI00004021 <br />
+                <button type="button" class="btn btn-primary btn-sm px-5 py-0" data-toggle="modal"
+                  data-target="#geTi_detailView">
+                  상세보기
+                </button>
+              </td>
+              <td>국립해양생물자원관</td>
+              <td>Sepia esculenta</td>
+              <td>참갑오징어</td>
+              <td>근육</td>
+              <td>'-80℃ 초저온냉동</td>
+              <td>99.9% EtOH</td>
+              <td>대한민국 충청남도</td>
+              <td>2020-06-24</td>
+              <td>분양가능</td>
+              <td>5 vial</td>
+              <td></td>
+            </tr>
+            <tr>
+              <td>1</td>
+              <td>
+                MABIK TI00004021 <br />
+                <button type="button" class="btn btn-primary btn-sm px-5 py-0" data-toggle="modal"
+                  data-target="#geTi_detailView">
+                  상세보기
+                </button>
+              </td>
+              <td>국립해양생물자원관</td>
+              <td>Sepia esculenta</td>
+              <td>참갑오징어</td>
+              <td>근육</td>
+              <td>'-80℃ 초저온냉동</td>
+              <td>99.9% EtOH</td>
+              <td>대한민국 충청남도</td>
+              <td>2020-06-24</td>
+              <td>분양가능</td>
+              <td>5 vial</td>
+              <td></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <!-- 상세보기 모달 -->
+      <div class="modal fade" id="geTi_detailView" tabindex="-1" aria-labelledby="detailViewTitle" aria-modal="true"
+        role="dialog">
+        <div class="modal-dialog modal-lg modal-dialog-scrollable">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title font-weight-bold" id="exampleModalScrollableTitle">
+                <i class="bi bi-circle-fill text-secondary"></i> 유전자원(조직) 상세보기
+              </h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">×</span>
+              </button>
+            </div>
+            <div class="modal-body m-2">
+              <div class="card mb-2">
+                <div class="row no-gutters">
+                  <div class="col-md-4 bg-light d-flex align-items-center justify-content-center">
+                    <h5 class="m-0">자원정보</h5>
+                  </div>
+                  <div class="col-md-8">
+                    <div class="card-body">
+                      <p class="mb-0">
+                        <strong>공개타입 :</strong> 대민공개 <br>
+                        <strong>실물자원보유 :</strong> Y <br>
+                        <strong>이관대상여부 :</strong> <br>
+                        <strong>사업명 :</strong> 해양천연물라이브러리 구축을 위한 기반연구 - 해양바이오산업화 헬프데스크 <br>
+                        <strong>반입내용 :</strong> 채집 <br>
+                        <strong>임시번호 :</strong> NP-0087 <br>
+                        <strong>자원번호 :</strong> MABIK NP60150005 <br>
+                        <strong>제공(등록)자 :</strong> <br>
+                        <strong>제공(등록)기관 :</strong> <br>
+                        <strong>관리기관 :</strong> 국립해양생물자원관 <br>
+                        <strong>수장위치 :</strong> NP-DF01-1-4-4-1
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="card mb-2">
+                <div class="row no-gutters">
+                  <div class="col-md-4 bg-light d-flex align-items-center justify-content-center">
+                    <h5 class="m-0">동정상태</h5>
+                  </div>
+                  <div class="col-md-8">
+                    <div class="card-body">
+                      <p class="mb-0">
+                        <strong>동정여부 :</strong> <br>
+                        <strong>미동정학명 :</strong> <br>
+                        <strong>동정일자 :</strong> <br>
+                        <strong>동정자 :</strong>
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="card mb-2">
+                <div class="row no-gutters">
+                  <div class="col-md-4 bg-light d-flex align-items-center justify-content-center">
+                    <h5 class="m-0">확증자원</h5>
+                  </div>
+                  <div class="col-md-8">
+                    <div class="card-body">
+                      <p class="mb-0">
+                        <strong>확증자원번호 :</strong> <br>
+                        <strong>확증자원유형 :</strong>
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="card mb-2">
+                <div class="row no-gutters">
+                  <div class="col-md-4 bg-light d-flex align-items-center justify-content-center">
+                    <h5 class="m-0">생물종</h5>
+                  </div>
+                  <div class="col-md-8">
+                    <div class="card-body">
+                      <p class="mb-0">
+                        <strong>학명 :</strong> Sonchus brachyotus <br>
+                        <strong>국명 :</strong> 사데풀 <br>
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="card mb-2">
+                <div class="row no-gutters">
+                  <div class="col-md-4 bg-light d-flex align-items-center justify-content-center">
+                    <h5 class="m-0">추출물정보</h5>
+                  </div>
+                  <div class="col-md-8">
+                    <div class="card-body">
+                      <p class="mb-0">
+                        <strong>생물분류 :</strong> 염생식물 <br>
+                        <strong>추출부위 :</strong> 전체 <br>
+                        <strong>추출용매 :</strong> 70% EtOH <br>
+                        <strong>추출방법 :</strong> 초음파 <br>
+                        <strong>추출물무게(g) :</strong> 410.5 <br>
+                        <strong>생체시료무게(g/l) :</strong> 1595.5 <br>
+                        <strong>추출수율(%) :</strong> 25.73 <br>
+                        <strong>추출횟수 :</strong> 8
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="card mb-2">
+                <div class="row no-gutters">
+                  <div class="col-md-4 bg-light d-flex align-items-center justify-content-center">
+                    <h5 class="m-0">분양상태</h5>
+                  </div>
+                  <div class="col-md-8">
+                    <div class="card-body">
+                      <p class="mb-0">
+                        <strong>분양상태 :</strong> 분양가능 <br>
+                        <strong>분양불가사유 :</strong>
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="card mb-2">
+                <div class="row no-gutters">
+                  <div class="col-md-4 bg-light d-flex align-items-center justify-content-center">
+                    <h5 class="m-0">재고관리</h5>
+                  </div>
+                  <div class="col-md-8">
+                    <div class="card-body">
+                      <p class="mb-0">
+                        <strong>재고량 :</strong> 1000mg <br>
+                        <strong>영구보존수량 :</strong> 200mg <br>
+                        <strong>폐기수량 :</strong> 0mg <br>
+                        <strong>분양수량 :</strong> 20mg <br>
+                        <strong>품질테스트수량 :</strong>
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="card mb-2">
+                <div class="row no-gutters">
+                  <div class="col-md-4 bg-light d-flex align-items-center justify-content-center">
+                    <h5 class="m-0">채집정보</h5>
+                  </div>
+                  <div class="col-md-8">
+                    <div class="card-body">
+                      <p class="mb-0">
+                        <strong>채집일자 :</strong> 2015-08-25<br>
+                        <strong>채집기관 :</strong> <br>
+                        <strong>채집자 : </strong>
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="card mb-2">
+                <div class="row no-gutters">
+                  <div class="col-md-4 bg-light d-flex align-items-center justify-content-center">
+                    <h5 class="m-0">채집지</h5>
+                  </div>
+                  <div class="col-md-8">
+                    <div class="card-body">
+                      <p class="mb-0">
+                        <strong>위도 :</strong> 37° 39' 12.85" N<br>
+                        <strong>경도 :</strong> 126° 20' 20.93" E<br>
+                        <strong>국가 : </strong> 대한민국<br>
+                        <strong>해역 :</strong> <br>
+                        <strong>주소 :</strong> 대한민국 인청광역시 강화군 삼산면<br>
+                        <strong>상세주소 :</strong><br>
+                        <strong>주소(영문) :</strong>
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="card mb-2">
+                <div class="row no-gutters">
+                  <div class="col-md-4 bg-light d-flex align-items-center justify-content-center">
+                    <h5 class="m-0">Note</h5>
+                  </div>
+                  <div class="col-md-8">
+                    <div class="card-body">
+                      <p class="mb-0">
+
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-success px-4">인쇄</button>
+              <button type="button" class="btn btn-delete text-white px-4" data-dismiss="modal">
+                닫기
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+<!-- -------------------------------------------------------------------------------- -->
+      <div class="float-left">
+        <span class="rounded-pill bg-success text-white p-2 px-3">해양 유전자원(핵산)</span>
+        <span class="pl-2">검색하신 <strong>미역 4</strong>건이 검색되었습니다.</span>
+      </div>
+      <!-- 유전자원 테이블 정보2 gDNA-->
+      <div class="d-flex justify-content-end mt-sm-5 mb-sm-3">
+        <button class="btn btn-success px-4" type="button">
+            더보기
+        </button>
+      </div>
+      <!-- 테이블 -->
+      <div class="mb-5">
+        <table class="table table-hover mb-0 text-center" id="ge_srchResult_table">
+          <thead>
+            <tr class="table-primary">
+              <th>No.</th>
+              <th>자원번호</th>
+              <th>관리기관</th>
+              <th>학명</th>
+              <th>국명</th>
+              <th>채집주소</th>
+              <th>채집일자</th>
+              <th>핵산종류</th>
+              <th>보존방법</th>
+              <th>보존용액</th>
+              <th>추출방법</th>
+              <th>추출키트</th>
+              <th>추출일</th>
+              <th>농도</th>
+              <th>순도</th>
+              <th>분양상태</th>
+              <th>분양수량</th>
+              <th>장바구니</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>1</td>
+              <td>
+                MABIK GR00001416 <br />
+                <button type="button" class="btn btn-primary btn-sm px-5 py-0" data-toggle="modal"
+                  data-target="#ge_detailView">
+                  상세보기
+                </button>
+              </td>
+              <td>국립해양생물자원관</td>
+              <td>Mytilus unguiculatus</td>
+              <td>홍합</td>
+              <td>대한민국 강원도</td>
+              <td>2015-10-19</td>
+              <td>DNA</td>
+              <td>'-80℃ 초저온냉동</td>
+              <td>AE Buffer</td>
+              <td>키트</td>
+              <td>QIAGEN</td>
+              <td>2015-10-19</td>
+              <td>92.85 ng/uL</td>
+              <td>2.096</td>
+              <td>분양가능</td>
+              <td>9 vial</td>
+              <td></td>
+            </tr>
+            <tr>
+              <td>2</td>
+              <td>
+                MABIK GR00001416 <br />
+                <button type="button" class="btn btn-primary btn-sm px-5 py-0" data-toggle="modal"
+                  data-target="#ge_detailView">
+                  상세보기
+                </button>
+              </td>
+              <td>국립해양생물자원관</td>
+              <td>Mytilus unguiculatus</td>
+              <td>홍합</td>
+              <td>대한민국 강원도</td>
+              <td>2015-10-19</td>
+              <td>DNA</td>
+              <td>'-80℃ 초저온냉동</td>
+              <td>AE Buffer</td>
+              <td>키트</td>
+              <td>QIAGEN</td>
+              <td>2015-10-19</td>
+              <td>92.85 ng/uL</td>
+              <td>2.096</td>
+              <td>분양가능</td>
+              <td>9 vial</td>
+              <td></td>
+            </tr>
+            <tr>
+              <td>3</td>
+              <td>
+                MABIK GR00001416 <br />
+                <button type="button" class="btn btn-primary btn-sm px-5 py-0" data-toggle="modal"
+                  data-target="#ge_detailView">
+                  상세보기
+                </button>
+              </td>
+              <td>국립해양생물자원관</td>
+              <td>Mytilus unguiculatus</td>
+              <td>홍합</td>
+              <td>대한민국 강원도</td>
+              <td>2015-10-19</td>
+              <td>DNA</td>
+              <td>'-80℃ 초저온냉동</td>
+              <td>AE Buffer</td>
+              <td>키트</td>
+              <td>QIAGEN</td>
+              <td>2015-10-19</td>
+              <td>92.85 ng/uL</td>
+              <td>2.096</td>
+              <td>분양가능</td>
+              <td>9 vial</td>
+              <td></td>
+            </tr>
+            <tr>
+              <td>4</td>
+              <td>
+                MABIK GR00001416 <br />
+                <button type="button" class="btn btn-primary btn-sm px-5 py-0" data-toggle="modal"
+                  data-target="#ge_detailView">
+                  상세보기
+                </button>
+              </td>
+              <td>국립해양생물자원관</td>
+              <td>Mytilus unguiculatus</td>
+              <td>홍합</td>
+              <td>대한민국 강원도</td>
+              <td>2015-10-19</td>
+              <td>DNA</td>
+              <td>'-80℃ 초저온냉동</td>
+              <td>AE Buffer</td>
+              <td>키트</td>
+              <td>QIAGEN</td>
+              <td>2015-10-19</td>
+              <td>92.85 ng/uL</td>
+              <td>2.096</td>
+              <td>분양가능</td>
+              <td>9 vial</td>
+              <td></td>
+            </tr>
+            <tr>
+              <td>5</td>
+              <td>
+                MABIK GR00001416 <br />
+                <button type="button" class="btn btn-primary btn-sm px-5 py-0" data-toggle="modal"
+                  data-target="#ge_detailView">
+                  상세보기
+                </button>
+              </td>
+              <td>국립해양생물자원관</td>
+              <td>Mytilus unguiculatus</td>
+              <td>홍합</td>
+              <td>대한민국 강원도</td>
+              <td>2015-10-19</td>
+              <td>DNA</td>
+              <td>'-80℃ 초저온냉동</td>
+              <td>AE Buffer</td>
+              <td>키트</td>
+              <td>QIAGEN</td>
+              <td>2015-10-19</td>
+              <td>92.85 ng/uL</td>
+              <td>2.096</td>
+              <td>분양가능</td>
+              <td>9 vial</td>
+              <td></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <!-- 상세보기 모달 -->
+      <div class="modal fade" id="ge_detailView" tabindex="-1" aria-labelledby="detailViewTitle" aria-modal="true"
+        role="dialog">
+        <div class="modal-dialog modal-lg modal-dialog-scrollable">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title font-weight-bold" id="exampleModalScrollableTitle">
+                <i class="bi bi-circle-fill text-secondary"></i> 유전자원(핵산) 상세보기
+              </h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">×</span>
+              </button>
+            </div>
+            <div class="modal-body m-2">
+              <div class="card mb-2">
+                <div class="row no-gutters">
+                  <div class="col-md-4 bg-light d-flex align-items-center justify-content-center">
+                    <h5 class="m-0">자원정보</h5>
+                  </div>
+                  <div class="col-md-8">
+                    <div class="card-body">
+                      <p class="mb-0">
+                        <strong>공개타입 :</strong> 대민공개 <br>
+                        <strong>실물자원보유 :</strong> Y <br>
+                        <strong>이관대상여부 :</strong> <br>
+                        <strong>사업명 :</strong> 해양천연물라이브러리 구축을 위한 기반연구 - 해양바이오산업화 헬프데스크 <br>
+                        <strong>반입내용 :</strong> 채집 <br>
+                        <strong>임시번호 :</strong> NP-0087 <br>
+                        <strong>자원번호 :</strong> MABIK NP60150005 <br>
+                        <strong>제공(등록)자 :</strong> <br>
+                        <strong>제공(등록)기관 :</strong> <br>
+                        <strong>관리기관 :</strong> 국립해양생물자원관 <br>
+                        <strong>수장위치 :</strong> NP-DF01-1-4-4-1
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="card mb-2">
+                <div class="row no-gutters">
+                  <div class="col-md-4 bg-light d-flex align-items-center justify-content-center">
+                    <h5 class="m-0">동정상태</h5>
+                  </div>
+                  <div class="col-md-8">
+                    <div class="card-body">
+                      <p class="mb-0">
+                        <strong>동정여부 :</strong> <br>
+                        <strong>미동정학명 :</strong> <br>
+                        <strong>동정일자 :</strong> <br>
+                        <strong>동정자 :</strong>
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="card mb-2">
+                <div class="row no-gutters">
+                  <div class="col-md-4 bg-light d-flex align-items-center justify-content-center">
+                    <h5 class="m-0">확증자원</h5>
+                  </div>
+                  <div class="col-md-8">
+                    <div class="card-body">
+                      <p class="mb-0">
+                        <strong>확증자원번호 :</strong> <br>
+                        <strong>확증자원유형 :</strong>
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="card mb-2">
+                <div class="row no-gutters">
+                  <div class="col-md-4 bg-light d-flex align-items-center justify-content-center">
+                    <h5 class="m-0">생물종</h5>
+                  </div>
+                  <div class="col-md-8">
+                    <div class="card-body">
+                      <p class="mb-0">
+                        <strong>학명 :</strong> Sonchus brachyotus <br>
+                        <strong>국명 :</strong> 사데풀 <br>
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="card mb-2">
+                <div class="row no-gutters">
+                  <div class="col-md-4 bg-light d-flex align-items-center justify-content-center">
+                    <h5 class="m-0">추출물정보</h5>
+                  </div>
+                  <div class="col-md-8">
+                    <div class="card-body">
+                      <p class="mb-0">
+                        <strong>생물분류 :</strong> 염생식물 <br>
+                        <strong>추출부위 :</strong> 전체 <br>
+                        <strong>추출용매 :</strong> 70% EtOH <br>
+                        <strong>추출방법 :</strong> 초음파 <br>
+                        <strong>추출물무게(g) :</strong> 410.5 <br>
+                        <strong>생체시료무게(g/l) :</strong> 1595.5 <br>
+                        <strong>추출수율(%) :</strong> 25.73 <br>
+                        <strong>추출횟수 :</strong> 8
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="card mb-2">
+                <div class="row no-gutters">
+                  <div class="col-md-4 bg-light d-flex align-items-center justify-content-center">
+                    <h5 class="m-0">분양상태</h5>
+                  </div>
+                  <div class="col-md-8">
+                    <div class="card-body">
+                      <p class="mb-0">
+                        <strong>분양상태 :</strong> 분양가능 <br>
+                        <strong>분양불가사유 :</strong>
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="card mb-2">
+                <div class="row no-gutters">
+                  <div class="col-md-4 bg-light d-flex align-items-center justify-content-center">
+                    <h5 class="m-0">재고관리</h5>
+                  </div>
+                  <div class="col-md-8">
+                    <div class="card-body">
+                      <p class="mb-0">
+                        <strong>재고량 :</strong> 1000mg <br>
+                        <strong>영구보존수량 :</strong> 200mg <br>
+                        <strong>폐기수량 :</strong> 0mg <br>
+                        <strong>분양수량 :</strong> 20mg <br>
+                        <strong>품질테스트수량 :</strong>
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="card mb-2">
+                <div class="row no-gutters">
+                  <div class="col-md-4 bg-light d-flex align-items-center justify-content-center">
+                    <h5 class="m-0">채집정보</h5>
+                  </div>
+                  <div class="col-md-8">
+                    <div class="card-body">
+                      <p class="mb-0">
+                        <strong>채집일자 :</strong> 2015-08-25<br>
+                        <strong>채집기관 :</strong> <br>
+                        <strong>채집자 : </strong>
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="card mb-2">
+                <div class="row no-gutters">
+                  <div class="col-md-4 bg-light d-flex align-items-center justify-content-center">
+                    <h5 class="m-0">채집지</h5>
+                  </div>
+                  <div class="col-md-8">
+                    <div class="card-body">
+                      <p class="mb-0">
+                        <strong>위도 :</strong> 37° 39' 12.85" N<br>
+                        <strong>경도 :</strong> 126° 20' 20.93" E<br>
+                        <strong>국가 : </strong> 대한민국<br>
+                        <strong>해역 :</strong> <br>
+                        <strong>주소 :</strong> 대한민국 인청광역시 강화군 삼산면<br>
+                        <strong>상세주소 :</strong><br>
+                        <strong>주소(영문) :</strong>
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="card mb-2">
+                <div class="row no-gutters">
+                  <div class="col-md-4 bg-light d-flex align-items-center justify-content-center">
+                    <h5 class="m-0">Note</h5>
+                  </div>
+                  <div class="col-md-8">
+                    <div class="card-body">
+                      <p class="mb-0">
+
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-success px-4">인쇄</button>
+              <button type="button" class="btn btn-delete text-white px-4" data-dismiss="modal">
+                닫기
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+<!-- -------------------------------------------------------------------------------- -->
+      <div class="float-left">
+        <span class="rounded-pill bg-success text-white p-2 px-3">해양 미세조류</span>
+        <span class="pl-2">검색하신 <strong>미역 4</strong>건이 검색되었습니다.</span>
+      </div>     
+      <!-- 미세조류 테이블 정보 -->
+      <div class="d-flex justify-content-end mt-sm-5 mb-sm-3">
+        <button class="btn btn-success px-4" type="button">
+            더보기
+        </button>
+      </div>
+      <!-- 테이블 -->
+      <div class="mb-5">
+        <table class="table table-hover mb-0 text-center w-100" id="ai_srchResult_table">
+          <thead>
+            <tr class="table-primary">
+              <th>No.</th>
+              <th>자원번호</th>
+              <th>관리기관</th>
+              <th>분류유형</th>
+              <th>학명</th>
+              <th>해역</th>
+              <th>배양배지</th>
+              <th>분양상태</th>
+              <th>장바구니</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>1</td>
+              <td>
+                MABIK LP0000001 <br />
+                <button type="button" class="btn btn-primary btn-sm px-5 py-0" data-toggle="modal"
+                  data-target="#ai_detailView">
+                  상세보기
+                </button>
+              </td>
+              <td>국립해양생물자원관</td>
+              <td>미세조류</td>
+              <td>Amphidinium carterae</td>
+              <td>서해</td>
+              <td>F/2</td>
+              <td>분양가능</td>
+              <td></td>
+            </tr>
+            <tr>
+              <td>2</td>
+              <td>
+                MABIK LP0000001 <br />
+                <button type="button" class="btn btn-primary btn-sm px-5 py-0" data-toggle="modal"
+                  data-target="#ai_detailView">
+                  상세보기
+                </button>
+              </td>
+              <td>국립해양생물자원관</td>
+              <td>미세조류</td>
+              <td>Amphidinium carterae</td>
+              <td>서해</td>
+              <td>F/2</td>
+              <td>분양가능</td>
+              <td></td>
+            </tr>
+            <tr>
+              <td>3</td>
+              <td>
+                MABIK LP0000001 <br />
+                <button type="button" class="btn btn-primary btn-sm px-5 py-0" data-toggle="modal"
+                  data-target="#ai_detailView">
+                  상세보기
+                </button>
+              </td>
+              <td>국립해양생물자원관</td>
+              <td>미세조류</td>
+              <td>Amphidinium carterae</td>
+              <td>서해</td>
+              <td>F/2</td>
+              <td>분양가능</td>
+              <td></td>
+            </tr>
+            <tr>
+              <td>4</td>
+              <td>
+                MABIK LP0000001 <br />
+                <button type="button" class="btn btn-primary btn-sm px-5 py-0" data-toggle="modal"
+                  data-target="#ai_detailView">
+                  상세보기
+                </button>
+              </td>
+              <td>국립해양생물자원관</td>
+              <td>미세조류</td>
+              <td>Amphidinium carterae</td>
+              <td>서해</td>
+              <td>F/2</td>
+              <td>분양가능</td>
+              <td></td>
+            </tr>
+            <tr>
+              <td>5</td>
+              <td>
+                MABIK LP0000001 <br />
+                <button type="button" class="btn btn-primary btn-sm px-5 py-0" data-toggle="modal"
+                  data-target="#ai_detailView">
+                  상세보기
+                </button>
+              </td>
+              <td>국립해양생물자원관</td>
+              <td>미세조류</td>
+              <td>Amphidinium carterae</td>
+              <td>서해</td>
+              <td>F/2</td>
+              <td>분양가능</td>
+              <td></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <!-- 상세보기 모달 -->
+      <div class="modal fade" id="ai_detailView" tabindex="-1" aria-labelledby="detailViewTitle" aria-modal="true"
+        role="dialog">
+        <div class="modal-dialog modal-lg modal-dialog-scrollable">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title font-weight-bold" id="exampleModalScrollableTitle">
+                <i class="bi bi-circle-fill text-secondary"></i> 미세조류 상세보기
+              </h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">×</span>
+              </button>
+            </div>
+            <div class="modal-body m-2">
+              <div class="card mb-2">
+                <div class="row no-gutters">
+                  <div class="col-md-4 bg-light d-flex align-items-center justify-content-center">
+                    <h5 class="m-0">자원정보</h5>
+                  </div>
+                  <div class="col-md-8">
+                    <div class="card-body">
+                      <p class="mb-0">
+                        <strong>공개타입 :</strong> 대민공개 <br>
+                        <strong>실물자원보유 :</strong> Y <br>
+                        <strong>이관대상여부 :</strong> <br>
+                        <strong>사업명 :</strong> 해양천연물라이브러리 구축을 위한 기반연구 - 해양바이오산업화 헬프데스크 <br>
+                        <strong>반입내용 :</strong> 채집 <br>
+                        <strong>임시번호 :</strong> NP-0087 <br>
+                        <strong>자원번호 :</strong> MABIK NP60150005 <br>
+                        <strong>제공(등록)자 :</strong> <br>
+                        <strong>제공(등록)기관 :</strong> <br>
+                        <strong>관리기관 :</strong> 국립해양생물자원관 <br>
+                        <strong>수장위치 :</strong> NP-DF01-1-4-4-1
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="card mb-2">
+                <div class="row no-gutters">
+                  <div class="col-md-4 bg-light d-flex align-items-center justify-content-center">
+                    <h5 class="m-0">동정상태</h5>
+                  </div>
+                  <div class="col-md-8">
+                    <div class="card-body">
+                      <p class="mb-0">
+                        <strong>동정여부 :</strong> <br>
+                        <strong>미동정학명 :</strong> <br>
+                        <strong>동정일자 :</strong> <br>
+                        <strong>동정자 :</strong>
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="card mb-2">
+                <div class="row no-gutters">
+                  <div class="col-md-4 bg-light d-flex align-items-center justify-content-center">
+                    <h5 class="m-0">확증자원</h5>
+                  </div>
+                  <div class="col-md-8">
+                    <div class="card-body">
+                      <p class="mb-0">
+                        <strong>확증자원번호 :</strong> <br>
+                        <strong>확증자원유형 :</strong>
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="card mb-2">
+                <div class="row no-gutters">
+                  <div class="col-md-4 bg-light d-flex align-items-center justify-content-center">
+                    <h5 class="m-0">생물종</h5>
+                  </div>
+                  <div class="col-md-8">
+                    <div class="card-body">
+                      <p class="mb-0">
+                        <strong>학명 :</strong> Sonchus brachyotus <br>
+                        <strong>국명 :</strong> 사데풀 <br>
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="card mb-2">
+                <div class="row no-gutters">
+                  <div class="col-md-4 bg-light d-flex align-items-center justify-content-center">
+                    <h5 class="m-0">추출물정보</h5>
+                  </div>
+                  <div class="col-md-8">
+                    <div class="card-body">
+                      <p class="mb-0">
+                        <strong>생물분류 :</strong> 염생식물 <br>
+                        <strong>추출부위 :</strong> 전체 <br>
+                        <strong>추출용매 :</strong> 70% EtOH <br>
+                        <strong>추출방법 :</strong> 초음파 <br>
+                        <strong>추출물무게(g) :</strong> 410.5 <br>
+                        <strong>생체시료무게(g/l) :</strong> 1595.5 <br>
+                        <strong>추출수율(%) :</strong> 25.73 <br>
+                        <strong>추출횟수 :</strong> 8
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="card mb-2">
+                <div class="row no-gutters">
+                  <div class="col-md-4 bg-light d-flex align-items-center justify-content-center">
+                    <h5 class="m-0">분양상태</h5>
+                  </div>
+                  <div class="col-md-8">
+                    <div class="card-body">
+                      <p class="mb-0">
+                        <strong>분양상태 :</strong> 분양가능 <br>
+                        <strong>분양불가사유 :</strong>
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="card mb-2">
+                <div class="row no-gutters">
+                  <div class="col-md-4 bg-light d-flex align-items-center justify-content-center">
+                    <h5 class="m-0">재고관리</h5>
+                  </div>
+                  <div class="col-md-8">
+                    <div class="card-body">
+                      <p class="mb-0">
+                        <strong>재고량 :</strong> 1000mg <br>
+                        <strong>영구보존수량 :</strong> 200mg <br>
+                        <strong>폐기수량 :</strong> 0mg <br>
+                        <strong>분양수량 :</strong> 20mg <br>
+                        <strong>품질테스트수량 :</strong>
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="card mb-2">
+                <div class="row no-gutters">
+                  <div class="col-md-4 bg-light d-flex align-items-center justify-content-center">
+                    <h5 class="m-0">채집정보</h5>
+                  </div>
+                  <div class="col-md-8">
+                    <div class="card-body">
+                      <p class="mb-0">
+                        <strong>채집일자 :</strong> 2015-08-25<br>
+                        <strong>채집기관 :</strong> <br>
+                        <strong>채집자 : </strong>
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="card mb-2">
+                <div class="row no-gutters">
+                  <div class="col-md-4 bg-light d-flex align-items-center justify-content-center">
+                    <h5 class="m-0">채집지</h5>
+                  </div>
+                  <div class="col-md-8">
+                    <div class="card-body">
+                      <p class="mb-0">
+                        <strong>위도 :</strong> 37° 39' 12.85" N<br>
+                        <strong>경도 :</strong> 126° 20' 20.93" E<br>
+                        <strong>국가 : </strong> 대한민국<br>
+                        <strong>해역 :</strong> <br>
+                        <strong>주소 :</strong> 대한민국 인청광역시 강화군 삼산면<br>
+                        <strong>상세주소 :</strong><br>
+                        <strong>주소(영문) :</strong>
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="card mb-2">
+                <div class="row no-gutters">
+                  <div class="col-md-4 bg-light d-flex align-items-center justify-content-center">
+                    <h5 class="m-0">Note</h5>
+                  </div>
+                  <div class="col-md-8">
+                    <div class="card-body">
+                      <p class="mb-0">
+
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-success px-4">인쇄</button>
+              <button type="button" class="btn btn-delete text-white px-4" data-dismiss="modal">
+                닫기
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!--contents 닫히는 div-->
+
+    <!-- footer -->
+    <div class="footer">
+      <div class="container-fluid bg-dark" style="height: 144px">
+        <div class="row" style="height: 100%">
+          <div class="col-6 col-md-4 d-flex align-items-center justify-content-end">
+            <img style="width: 100%; max-width: 320px" src="./img/footer/logo_f.png" alt="해양생명자원 소재관리 시스템 로고" />
+          </div>
+          <div class="col-md-4 d-none d-md-flex align-items-center" style="font-size: 14px; color: #9d9d9d">
+            <p class="m-0">
+              [33662] 충남 서천군 장항읍 장산로 101번길 75 해양수산부
+              국립해양생물자원관 <br />
+              COPYRIGHT (C) 2021. MARINE BIODIVERSITY INSTITUTE OF KOREA ALL
+              RIGHTS RESERVED.
+            </p>
+          </div>
+          <div class="col-6 col-md-4 d-flex align-items-center">
+            <div>
+              <div class="d-flex mb-2">
+                <!-- 패밀리 사이트 -->
+                <div class="dropup">
+                  <a class="btn btn-sm btn-outline-delete dropdown-toggle mr-2" href="#" role="button"
+                    id="dropdownMenuLink" data-toggle="dropdown" aria-expanded="false">
+                    패밀리 사이트
+                  </a>
+
+                  <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuLink">
+                    <a class="dropdown-item" href="https://www.mabik.re.kr/html/kr/" target="_blank">국립해양생물자원관</a>
+                    <a class="dropdown-item" href="https://www.mbris.kr/icmb/KR/index.do"
+                      target="_blank">해외해양생물자원연구사업단</a>
+                    <a class="dropdown-item" href="https://www.mabik.re.kr/html/abs/" target="_blank">ABS정보지원센터</a>
+                    <a class="dropdown-item" href="http://www.magic.re.kr/portal/main" target="_blank">MAGIC정보센터</a>
+                  </div>
+                </div>
+                <!-- 관련 사이트 -->
+                <div class="dropup">
+                  <a class="btn btn-sm btn-outline-delete dropdown-toggle" href="#" role="button" id="dropdownMenuLink"
+                    data-toggle="dropdown" aria-expanded="false">
+                    관련 사이트
+                  </a>
+
+                  <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuLink">
+                    <a class="dropdown-item" href="https://www.mof.go.kr/index.do" target="_blank">해양수산부</a>
+                    <a class="dropdown-item" href="https://www.nifs.go.kr/frcenter/" target="_blank">수산생명자원정보센터</a>
+                    <a class="dropdown-item" href="https://www.aris.re.kr/app/main/mainView.do"
+                      target="_blank">생명연구자원정보센터 ARIS</a>
+                    <a class="dropdown-item"
+                      href="https://www.kobic.re.kr/kobis/main.do;jsessionid=2F0CF6894CB12E6E4F8921A8BE92FBB1"
+                      target="_blank">한국생명공학연구원 KOBIS</a>
+                    <a class="dropdown-item" href="https://www.kbr.go.kr/index.do" target="_blank">국가 생물다양성 정보공유체계</a>
+                    <a class="dropdown-item" href="https://bris.go.kr/portal/main/main.do" target="_blank">BRIS
+                      생명자원정보서비스</a>
+                  </div>
+                </div>
+              </div>
+              <img src="./img/footer/logo_f_2.png" alt="국립해양생물자원관 로고" />
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!--footer 닫히는 div-->
+  </div>
+  <!--wrap 닫히는 div-->
+
+  <!-- 내부스타일설정 -->
+  <style>
+    @import url("https://fonts.googleapis.com/css2?family=Nanum+Gothic&family=Noto+Sans+KR&display=swap");
+
+    body {
+      font-family: "Noto Sans KR", "Nanum Gothic", sans-serif;
+      color: #333;
+    }
+
+    .form-control {
+      text-overflow: ellipsis;
+    }
+
+    .login-drop>.dropdown-toggle::after {
+      display: none;
+    }
+    table{
+      border-bottom: 1px solid #eee !important; 
+    }
+  </style>
+</body>
+
+</html>

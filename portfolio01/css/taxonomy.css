@@ -1,0 +1,53 @@
+@import url("https://fonts.googleapis.com/css2?family=Nanum+Gothic&family=Noto+Sans+KR&display=swap");
+
+body {
+    font-family: "Noto Sans KR", "Nanum Gothic", sans-serif;
+    color: #333;
+}
+
+.form-control {
+    text-overflow: ellipsis;
+}
+
+.list {
+    border: 1px solid rgba(0, 0, 0, 0.125);
+    height: 490px;
+    overflow: scroll;
+    
+    margin-top: 20px;
+}
+
+.list::-webkit-scrollbar {
+    -webkit-appearance: none;
+    width: 11px;
+}
+
+.list::-webkit-scrollbar-thumb {
+    border-radius: 8px;
+    border: 2px solid white; /* should match background, can't be transparent */
+    background-color: rgba(0, 0, 0, .5);
+    -webkit-box-shadow: 0 0 1px rgba(255, 255, 255, .5);
+}
+
+.list i {
+    cursor: pointer;
+}
+
+
+.tree {
+    overflow: scroll;
+    border: 1px solid rgba(0, 0, 0, 0.125);
+    height: 550px;
+}
+
+.tree::-webkit-scrollbar {
+    -webkit-appearance: none;
+    width: 11px;
+}
+
+.tree::-webkit-scrollbar-thumb {
+    border-radius: 8px;
+    border: 2px solid white; /* should match background, can't be transparent */
+    background-color: rgba(0, 0, 0, .5);
+    -webkit-box-shadow: 0 0 1px rgba(255, 255, 255, .5);
+}

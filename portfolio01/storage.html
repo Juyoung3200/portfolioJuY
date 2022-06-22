@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>수장고 관리::해양생명자원 소재관리 시스템</title>
+    <!-- 제이쿼리 -->
+    <script src="http://code.jquery.com/jquery-latest.js"></script>
+
+    <!-- 제이쿼리UI -->
+    <script
+      src="https://code.jquery.com/ui/1.13.1/jquery-ui.js"
+      integrity="sha256-6XMVI0zB8cRzfZjqKcD01PBsAy3FlDASrlC8SxCpInY="
+      crossorigin="anonymous"
+    ></script>
+
+    <!-- jstree -->
+    <link rel="stylesheet" href="./css/jstree/style.min.css">
+    <script src="./js/jstree.min.js"></script>
+
+    <!-- 부트스트랩 드롭다운 기능 -->
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+      integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+      crossorigin="anonymous"
+    ></script>
+
+
+    <!-- Bootstrap -->
+    <link href="./css/bootstrap.min.css" rel="stylesheet" />
+    <script src="./js/bootstrap.min.js"></script>
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css"
+    />
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+      <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+    <!-- 외부스타일시트 연결 -->
+    <link rel="stylesheet" href="./css/myScss.css" />
+    <link rel="stylesheet" href="./css/tree_srch.css" />
+  </head>
+
+  <body>
+    <form>
+      <div class="container-fluid">
+        <div class="my-3">
+          <header>
+            <div class="container-fluid">
+              <div class="row py-3">
+                <div class="col d-flex align-items-center">
+                  <i class="bi bi-circle-fill" style="color: #e46425"></i>
+                  <h5 class="font-weight-bold lead m-0 ml-2">수장고 관리</h5>
+                </div>
+                <div class="col d-flex justify-content-end align-items-center">
+                  <button
+                    type="reset"
+                    class="text-white btn btn-info px-4 mr-2"
+                  >
+                    초기화
+                  </button>
+                  <button type="button" class="text-white btn btn-info px-4">
+                    닫기
+                  </button>
+                </div>
+              </div>
+            </div>
+          </header>
+
+          <hr class="m-0 mb-3" />
+
+          <div class="row">
+            <div class="col-lg-5 mb-3">
+              <div class="card">
+                <div class="card-header text-center font-weight-bold">
+                  수장고
+                </div>
+                <div class="card-body" style="height: 590px">
+                  <div class="input-group">
+                    <input
+                      class="ellip form-control py-2"
+                      type="search"
+                      placeholder="검색어를 입력하세요."
+                    />
+                    <span class="input-group-append">
+                      <div
+                        style="cursor: pointer"
+                        class="input-group-text bg-secondary"
+                      >
+                        <i class="font-weight-bold text-white bi bi-search"></i>
+                      </div>
+                      <div
+                        style="cursor: pointer"
+                        class="input-group-text bg-secondary"
+                      >
+                        <i class="font-weight-bold text-white bi bi-arrow-clockwise"></i>
+                      </div>
+                    </span>
+                  </div>
+                  <div class="list">
+                    <ul class="px-3 pt-2 list-unstyled">
+                      <li>페이지 구현 전 상태입니다.</li>
+                    </ul>
+                  </div>
+                  <script>
+                    $(function () {
+                      var i1 = document.createElement("i"); //i1이라는 변수에 첫번째 아이콘 태그 <i> 만듦
+                      var i2 = document.createElement("i"); //i2이라는 변수에 두번째 아이콘 태그 <i> 만듦
+                      var nbsp1 = document.createTextNode("\u00a0"); //nbsp1라는 변수에 첫번째 아이콘 태그 앞에 사용할 띄어쓰기 텍스트 추가
+                      var nbsp2 = document.createTextNode("\u00a0"); //nbsp2라는 변수에 두개의 아이콘 태그 사이에 사용할 띄어쓰기 텍스트 추가
+                      i1.setAttribute("data-toggle", "tooltip"); //첫번째 아이콘 태그에 속성 네개 추가
+                      i1.setAttribute("data-placement", "bottom");
+                      i1.setAttribute("title", "트리보기");
+                      i1.setAttribute("class", "bi bi-list-ul");
+                      i2.setAttribute("data-toggle", "tooltip"); //두번째 아이콘 태그에 속성 네개 추가
+                      i2.setAttribute("data-placement", "bottom");
+                      i2.setAttribute("title", "선택하기");
+                      i2.setAttribute("class", "bi bi-check-circle-fill");
+                      $(".list>ul>li").append(nbsp1, i1, nbsp2, i2); //.list>ul>li에다가 '공백+첫번째아이콘태그+공백+두번째아이콘태그'를 갖다붙인다.
+
+                      $('[data-toggle="tooltip"]').tooltip(); //툴팁 나오게 하기
+
+                    });
+                  </script>
+                </div>
+              </div>
+            </div>
+            <div class="col-lg-7">
+              <div class="card">
+                <div class="card-header text-center font-weight-bold">
+                  선택 수장고 위치 정보 (페이지 구현 전 상태입니다.)
+                </div>
+                <div class="card-body" style="height: 590px">
+                  <div class="tree px-3 pt-2">
+                    Based on <a href="https://www.jstree.com/">jsTree</a>.
+                    <hr />
+                    Filter: 
+                    <div class="input-group" style="width: 100%; max-width: 240px;">
+                      <input type="text" id="search" class="form-control form-control-sm" />
+                      <button id="clear" class="input-group-append btn btn-sm btn-secondary">Clear</button>
+                    </div>
+                    <div id="jstree">
+                    
+                    </div>
+                    <p>Selected items:</p>
+                    <ul id="output"></ul>
+                   
+                  </div>
+                </div>
+              </div>
+            </div>
+            <script>
+              $("#jstree").jstree({
+                plugins: ["search", "checkbox", "wholerow"],
+                core: {
+                  data: [
+                    { id: "1", parent: "#", text: "Greater London"},
+                    { id: "11", parent: "1", text: "Goldsmiths College" },
+                    { id: "12", parent: "1", text: "King's College London" },
+                    {
+                      id: "13",
+                      parent: "1",
+                      text: "University College London",
+                    },
+                    {
+                      id: "14",
+                      parent: "1",
+                      text: "University of Westminster",
+                    },
+                    { id: "2", parent: "#", text: "North East" },
+                    { id: "21", parent: "2", text: "University of Durham" },
+                    { id: "22", parent: "2", text: "University of Teeside" },
+                    { id: "3", parent: "#", text: "North West" },
+                    { id: "31", parent: "3", text: "Lancaster University" },
+                    { id: "32", parent: "3", text: "University of Liverpool" },
+                    { id: "33", parent: "3", text: "University of Manchester" },
+                    {
+                      id: "34",
+                      parent: "3",
+                      text: "Manchester Metropolitan University",
+                    },
+                    { id: "4", parent: "#", text: "South West" },
+                    { id: "41", parent: "4", text: "University of Bath" },
+                    { id: "42", parent: "4", text: "University of Bristol" },
+                    { id: "43", parent: "4", text: "University of Exeter" },
+                    { id: "44", parent: "4", text: "University of Plymouth" },
+                    { id: "5", parent: "#", text: "Yorkshire and Humberside" },
+                    { id: "51", parent: "5", text: "University of Hull" },
+                    { id: "52", parent: "5", text: "University of Leeds" },
+                    { id: "53", parent: "5", text: "University of York" },
+                  ],
+                  animation: false,
+                  //'expand_selected_onload': true,
+                  themes: {
+                    icons: false,
+                  },
+                },
+                search: {
+                  show_only_matches: true,
+                  show_only_matches_children: true,
+                },
+              });
+
+              $("#search").on("keyup change", function () {
+                $("#jstree").jstree(true).search($(this).val());
+              });
+
+              $("#clear").click(function (e) {
+                $("#search").val("").change().focus();
+              });
+
+              $("#jstree").on("changed.jstree", function (e, data) {
+                var objects = data.instance.get_selected(true);
+                var leaves = $.grep(objects, function (o) {
+                  return data.instance.is_leaf(o);
+                });
+                var list = $("#output");
+                list.empty();
+                $.each(leaves, function (i, o) {
+                  $("<li/>").text(o.text).appendTo(list);
+                });
+              });
+
+              
+
+            </script>
+          </div>
+        </div>
+      </div>
+    </form>
+  </body>
+</html>
