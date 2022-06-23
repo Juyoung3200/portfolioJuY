@@ -1,0 +1,415 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>해양생명자원 소재관리 시스템</title>
+
+  <!-- 제이쿼리 -->
+  <script src="http://code.jquery.com/jquery-latest.js"></script>
+
+  <!-- 제이쿼리UI -->
+  <script src="https://code.jquery.com/ui/1.13.1/jquery-ui.js"
+    integrity="sha256-6XMVI0zB8cRzfZjqKcD01PBsAy3FlDASrlC8SxCpInY=" crossorigin="anonymous"></script>
+
+  <!-- chart.js 연결 -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/chartjs-plugin-doughnutlabel/2.0.3/chartjs-plugin-doughnutlabel.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/chartjs-plugin-datalabels/0.7.0/chartjs-plugin-datalabels.min.js"></script>
+
+  <!-- Bootstrap -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.1/umd/popper.min.js"></script>
+  <!-- <link href="./css/bootstrap.min.css" rel="stylesheet" /> -->
+  <!-- <script src="./js/bootstrap.min.js"></script> -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css" integrity="sha384-zCbKRCUGaJDkqS1kPbPd7TveP5iyJE0EjAuZQTgFLD2ylzuqKfdKlfG/eSrtxUkn" crossorigin="anonymous">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.min.js" integrity="sha384-VHvPCCyXqtD5DqJeNxl2dtTyhF78xXNXdkwX1CZeRusQfRKp+tA7hAShOK/B/fQ2" crossorigin="anonymous"></script>
+  
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css" />
+
+  <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+  <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+  <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+      <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+  <!-- 외부스타일시트(부트스트랩 scss파일 컴파일 된 css) 연결 -->
+  <!-- <link rel="stylesheet" href="./css/myScss.css" /> -->
+  <link rel="stylesheet" href="./css/main.css" />
+
+  <!-- 외부스크립트 연결 -->
+  <script src="./js/main.js"></script>
+</head>
+
+<body>
+  <div class="wrap">
+    <!-- header -->
+    <div class="header">
+      <!-- 유틸리티 메뉴바 -->
+
+      <!-- 로그인 하기 전 -->
+      <!--d-none으로 가려놓은 상태-->
+      <nav class="d-none navbar navbar-expand-lg navbar-dark bg-dark justify-content-end">
+        <div class="login-drop dropdown">
+          <a class="dropdown-toggle text-decoration-none text-white" id="dropdownSetting" data-toggle="dropdown"
+            aria-expanded="false" href="#">
+            <button class="btn btn-sm btn-light rounded-pill mr-2 px-3">
+              로그인
+            </button>
+          </a>
+          <div class="p-0 dropdown-menu dropdown-menu-right" aria-labelledby="dropdownSetting">
+            <div class="card" style="width: 28rem">
+              <div class="card-body">
+                <h5 class="card-title font-weight-bold">로그인</h5>
+                <p class="card-text">
+                  <small>가입하신 아이디와 비밀번호를 입력해주세요.</small>
+                </p>
+              </div>
+
+              <form class="form-signin mx-3">
+                <label for="inputEmail" class="sr-only">Email address</label>
+                <input type="text" id="inputID" class="form-control mb-1" placeholder="아이디" required="" autofocus="" />
+                <label for="inputPassword" class="sr-only">Password</label>
+                <input type="password" id="inputPassword" class="form-control" placeholder="비밀번호" required="" />
+                <div class="checkbox mt-2 mb-3" style="font-size: 12px">
+                  <label>
+                    <input type="checkbox" value="remember-me" /> 아이디 저장
+                  </label>
+                </div>
+                <button class="btn btn-lg btn-primary btn-block" type="submit">
+                  로그인
+                </button>
+              </form>
+
+              <div class="card-body">
+                <div class="d-flex justify-content-center">
+                  <button type="button" class="btn btn-success btn-sm rounded-pill mx-2 px-3">
+                    회원가입
+                  </button>
+                  <button type="button" class="btn btn-success btn-sm rounded-pill mx-2 px-3">
+                    아이디 찾기
+                  </button>
+                  <button type="button" class="btn btn-success btn-sm rounded-pill mx-2 px-3">
+                    비밀번호 찾기
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </nav>
+
+      <!-- 로그인 한 사용자가 일반회원일 때 -->
+      <!--d-none으로 가려놓은 상태-->
+      <nav class="d-none navbar navbar-expand-lg navbar-dark bg-dark justify-content-end">
+        <div class="dropdown">
+          <a class="dropdown-toggle text-decoration-none text-white" id="dropdownSetting" data-toggle="dropdown"
+            aria-expanded="false" href="#"><i class="bi bi-person-fill"></i> 홍길동 님</a>
+          <div class="p-0 dropdown-menu dropdown-menu-right" aria-labelledby="dropdownSetting">
+            <div class="card" style="width: 18rem">
+              <div class="card-body">
+                <h5 class="card-title font-weight-bold">마이페이지</h5>
+                <p class="card-text"><small>안녕하세요, 홍길동 님?</small></p>
+              </div>
+              <div class="card-body text-center bg-primary text-white">
+                <p>소속: 한국해양과학기술원</p>
+                <p class="mb-0">부서: 해양자원연구본부</p>
+              </div>
+              <ul class="list-group list-group-flush">
+                <li class="list-group-item">
+                  <button type="button" class="btn btn-outline-success btn-sm btn-block">
+                    <i class="bi bi-cart"></i> 장바구니
+                  </button>
+                </li>
+                <li class="list-group-item">
+                  <button type="button" class="btn btn-outline-success btn-sm btn-block">
+                    <i class="bi bi-file-earmark-text"></i> 분양내역
+                  </button>
+                </li>
+                <li class="list-group-item">
+                  <button type="button" class="btn btn-outline-success btn-sm btn-block">
+                    <i class="bi bi-pencil-square"></i> 회원가입정보
+                  </button>
+                </li>
+              </ul>
+              <div class="card-body">
+                <div class="d-flex justify-content-center">
+                  <button type="button" class="btn btn-success btn-sm rounded-pill mx-2 px-4">
+                    닫기
+                  </button>
+                  <button type="button" class="btn btn-success btn-sm rounded-pill mx-2 px-4">
+                    로그아웃
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </nav>
+
+      <!-- 로그인 한 사용자가 기관회원일 때 -->
+      <nav class="navbar navbar-expand-lg navbar-dark bg-dark justify-content-end">
+        <a href="./sp_srch_organ.html" role="button" class="btn btn-sm btn-outline-light rounded-pill mr-2 px-3">
+          통합관리시스템
+          <!--현재는 표본 등록/검색 페이지로 이동하지만, 본인이 담당하는 자원 등록/검색 페이지로 이동되게 기능구현해야 함-->
+        </a>
+        <div class="dropdown">
+          <a class="dropdown-toggle text-decoration-none text-white" id="dropdownSetting" data-toggle="dropdown"
+            aria-expanded="false" href="#"><i class="bi bi-person-fill"></i> 홍길동 님</a>
+          <div class="p-0 dropdown-menu dropdown-menu-right" aria-labelledby="dropdownSetting">
+            <div class="card" style="width: 18rem">
+              <div class="card-body">
+                <h5 class="card-title font-weight-bold">마이페이지</h5>
+                <p class="card-text"><small>안녕하세요, 홍길동 님?</small></p>
+              </div>
+              <div class="card-body text-center bg-primary text-white">
+                <p>기관: 국립해양생물자원관 (MABIK)</p>
+                <p class="mb-0">그룹: 자원관 자원관리그룹</p>
+              </div>
+              <ul class="list-group list-group-flush">
+                <li class="list-group-item">
+                  <button type="button" class="btn btn-outline-success btn-sm btn-block">
+                    <i class="bi bi-cart"></i> 분양 건 배송관리
+                  </button>
+                </li>
+                <li class="list-group-item">
+                  <button type="button" class="btn btn-outline-success btn-sm btn-block">
+                    <i class="bi bi-file-earmark-text"></i> 분양 검토 및 승인
+                  </button>
+                </li>
+                <li class="list-group-item">
+                  <button type="button" class="btn btn-outline-success btn-sm btn-block">
+                    <i class="bi bi-pencil-square"></i> 회원가입정보
+                  </button>
+                </li>
+              </ul>
+              <div class="card-body">
+                <div class="d-flex justify-content-center">
+                  <button type="button" class="btn btn-success btn-sm rounded-pill mx-2 px-4">
+                    닫기
+                  </button>
+                  <button type="button" class="btn btn-success btn-sm rounded-pill mx-2 px-4">
+                    로그아웃
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </nav>
+
+      <!-- GNB -->
+      <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand" href="./main.html"><img style="max-width: 300px" src="./img/header/logo_h.png"
+            alt="로고" /></a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+          aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav justify-content-end">
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
+                aria-expanded="false">
+                소개
+              </a>
+              <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                <a class="dropdown-item" href="#">시스템 소개</a>
+                <a class="dropdown-item" href="#">분양 안내</a>
+                <a class="dropdown-item" href="#">자원 현황</a>
+              </div>
+            </li>
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
+                aria-expanded="false">
+                추출물
+              </a>
+              <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                <a class="dropdown-item" href="#">추출물 검색/분양</a>
+                <a class="dropdown-item" href="#">활성자원 검색</a>
+              </div>
+            </li>
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
+                aria-expanded="false">
+                미생물
+              </a>
+              <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                <a class="dropdown-item" href="#">미생물 검색/분양</a>
+              </div>
+            </li>
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
+                aria-expanded="false">
+                미세조류
+              </a>
+              <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                <a class="dropdown-item" href="#">미세조류 검색/분양</a>
+              </div>
+            </li>
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
+                aria-expanded="false">
+                유전자원
+              </a>
+              <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                <a class="dropdown-item" href="#">유전자원 검색/분양</a>
+              </div>
+            </li>
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
+                aria-expanded="false">
+                분석서비스
+              </a>
+              <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                <a class="dropdown-item" href="#">빅데이터 분석 현황</a>
+              </div>
+            </li>
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
+                aria-expanded="false">
+                고객센터
+              </a>
+              <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                <a class="dropdown-item" href="#">공지사항</a>
+                <a class="dropdown-item" href="#">게시판</a>
+                <a class="dropdown-item" href="#">FAQ</a>
+                <a class="dropdown-item" href="#">Q&A</a>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </nav>
+    </div>
+    <!--header 닫히는 div-->
+
+    <!-- contents -->
+    <div class="container-fluid py-xl-4">
+      <div class="row align-items-center main-row">
+        <div class="col-xl-5">
+          <img class="img-fluid" src="./img/container/main1.png" alt="메인이미지" />
+        </div>
+        <div class="col-xl-7 mb-5">
+          <p style="font-size: 38px">해양생명자원은</p>
+          <h1 class="font-weight-bold d-inline" style="font-size: 44px">
+            해양생명자원 소재관리 시스템
+          </h1>
+          <p class="d-inline" style="font-size: 38px">과 함께!</p>
+
+          <div class="input-group my-5">
+            <input type="text" class="form-control form-control-lg" placeholder="학명 또는 국명을 입력해 주세요."
+              aria-label="Recipient's username" aria-describedby="button-addon" />
+            <div class="input-group-append">
+              <button class="btn btn-success" type="button" id="button-addon" onclick="location.href='./srchResult.html' ">
+                <i class="px-1 bi bi-search"></i>
+              </button>
+            </div>
+          </div>
+          <!--input-group 닫히는 div-->
+          <div class="row">
+            <div class="col-lg-6 mb-5 mb-xl-0 mt-5">
+              <canvas id="myChart1"></canvas>
+            </div>
+            <div class="col-lg-6 mb-5 mb-xl-0 mt-5">
+              <canvas id="myChart2"></canvas>
+            </div>
+          </div>
+        </div>
+        <!--두번째 col-xl-6 닫히는 div-->
+      </div>
+      <!--row 닫히는 div-->
+    </div>
+    <!--contents 닫히는 div-->
+
+    <!-- footer -->
+    <div class="footer">
+      <div class="container-fluid bg-dark" style="height: 144px">
+        <div class="row" style="height: 100%">
+          <div class="col-6 col-md-4 d-flex align-items-center justify-content-end">
+            <img style="width: 100%; max-width: 320px" src="./img/footer/logo_f.png" alt="해양생명자원 소재관리 시스템 로고" />
+          </div>
+          <div class="col-md-4 d-none d-md-flex align-items-center" style="font-size: 14px; color: #9d9d9d">
+            <p class="m-0">
+              [33662] 충남 서천군 장항읍 장산로 101번길 75 해양수산부
+              국립해양생물자원관 <br />
+              COPYRIGHT (C) 2021. MARINE BIODIVERSITY INSTITUTE OF KOREA ALL
+              RIGHTS RESERVED.
+            </p>
+          </div>
+          <div class="col-6 col-md-4 d-flex align-items-center">
+            <div>
+              <div class="d-flex mb-2">
+                <!-- 패밀리 사이트 -->
+                <div class="dropup">
+                  <a class="btn btn-sm btn-outline-delete dropdown-toggle mr-2" href="#" role="button"
+                    id="dropdownMenuLink" data-toggle="dropdown" aria-expanded="false">
+                    패밀리 사이트
+                  </a>
+
+                  <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuLink">
+                    <a class="dropdown-item" href="https://www.mabik.re.kr/html/kr/" target="_blank">국립해양생물자원관</a>
+                    <a class="dropdown-item" href="https://www.mbris.kr/icmb/KR/index.do"
+                      target="_blank">해외해양생물자원연구사업단</a>
+                    <a class="dropdown-item" href="https://www.mabik.re.kr/html/abs/" target="_blank">ABS정보지원센터</a>
+                    <a class="dropdown-item" href="http://www.magic.re.kr/portal/main" target="_blank">MAGIC정보센터</a>
+                  </div>
+                </div>
+                <!-- 관련 사이트 -->
+                <div class="dropup">
+                  <a class="btn btn-sm btn-outline-delete dropdown-toggle" href="#" role="button" id="dropdownMenuLink"
+                    data-toggle="dropdown" aria-expanded="false">
+                    관련 사이트
+                  </a>
+
+                  <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuLink">
+                    <a class="dropdown-item" href="https://www.mof.go.kr/index.do" target="_blank">해양수산부</a>
+                    <a class="dropdown-item" href="https://www.nifs.go.kr/frcenter/" target="_blank">수산생명자원정보센터</a>
+                    <a class="dropdown-item" href="https://www.aris.re.kr/app/main/mainView.do"
+                      target="_blank">생명연구자원정보센터 ARIS</a>
+                    <a class="dropdown-item"
+                      href="https://www.kobic.re.kr/kobis/main.do;jsessionid=2F0CF6894CB12E6E4F8921A8BE92FBB1"
+                      target="_blank">한국생명공학연구원 KOBIS</a>
+                    <a class="dropdown-item" href="https://www.kbr.go.kr/index.do" target="_blank">국가 생물다양성 정보공유체계</a>
+                    <a class="dropdown-item" href="https://bris.go.kr/portal/main/main.do" target="_blank">BRIS
+                      생명자원정보서비스</a>
+                  </div>
+                </div>
+              </div>
+              <img src="./img/footer/logo_f_2.png" alt="국립해양생물자원관 로고" />
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!--footer 닫히는 div-->
+  </div>
+  <!--wrap 닫히는 div-->
+
+  <!-- 내부스타일설정 -->
+  <style>
+    @import url("https://fonts.googleapis.com/css2?family=Nanum+Gothic&family=Noto+Sans+KR&display=swap");
+
+    body {
+      font-family: "Noto Sans KR", "Nanum Gothic", sans-serif;
+      color: #333;
+    }
+
+    .main-row {
+      margin: 90px;
+    }
+
+    .form-control {
+      text-overflow: ellipsis;
+    }
+
+    .login-drop>.dropdown-toggle::after {
+      display: none;
+    }
+  </style>
+
+</body>
+
+</html>
