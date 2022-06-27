@@ -28,11 +28,6 @@ $(document).ready(function () {
     galleryTopMain.controller.control = galleryThumbsMain;
     galleryThumbsMain.controller.control = galleryTopMain;
 
-});
-
-
-$(document).ready(function () {
-
 
     function slide02() {
         $(".slider-wrap").slick({
